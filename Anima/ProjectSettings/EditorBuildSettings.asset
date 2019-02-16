@@ -5,7 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/omori/Scenes/WeaponSelect.unity
+    guid: 1ce97db26acbce743b8fe122c59994e8
+  - enabled: 1
+    path: Assets/omori/Scenes/WeaponManager.unity
+    guid: d0542c5c8bfef8b43969ba40dd1d8139
+  - enabled: 1
+    path: Assets/omori/Scenes/WeaponEnhance.unity
+    guid: c103cbfa05e9e194aacb861c3be38b9c
   m_configObjects: {}

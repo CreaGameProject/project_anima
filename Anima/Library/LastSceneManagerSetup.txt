@@ -1,7 +1,4 @@
 sceneSetups:
-- path: Assets/Title/Title.unity
+- path: Assets/omori/Scenes/WeaponEnhance.unity
   isLoaded: 1
   isActive: 1
-- path: Assets/Scenes/WeaponEnhance.unity
-  isLoaded: 1
-  isActive: 0
