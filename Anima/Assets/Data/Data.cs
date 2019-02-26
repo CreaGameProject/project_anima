@@ -18,6 +18,7 @@ public class Data : MonoBehaviour
     public Weapon MainWeapon;
     public Weapon SubWeapon;
     public Mission selectedMission;
+    public Item[] takeItems;
 
 
     //データのセーブ

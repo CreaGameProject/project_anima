@@ -7,23 +7,17 @@ public class Material : ScriptableObject
 {
     //素材(ミッションで獲得するもの。(所持金を含む))
 
-    //アイテム名
-    [SerializeField] private MaterialName materialName;
-
     //アイコン
     [SerializeField] private Sprite icon;
+    public Sprite Icon { get { return icon; } }
 
     //数
     [SerializeField] private int number;
+    public int Number { get { return number; } set { number = value < 0 ? 0: value; } }
 
     private char cord;
     public byte Cord { private get { return (byte)cord; } set { cord = (char)value; } }
 
-
-    //プロパティ
-    public MaterialName Name { get { return materialName; } }
-    public Sprite Icon { get { return icon; } }
-    public int Number { get { return number; } set { number = value < 0 ? 0: value; } }
 
 
     //セーブ＆ロード

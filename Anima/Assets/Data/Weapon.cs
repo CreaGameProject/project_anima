@@ -10,62 +10,60 @@ public class Weapon : ScriptableObject
     //固有値の変更は強化シーン
 
 
-    //武器名
-    [SerializeField] private string weaponName;
 
     //武器の種類(WeaponKind => Dataのenum)
     [SerializeField] private WeaponKind kind;
+    public WeaponKind Kind { get { return kind; } }
 
     //武器モデル
     [SerializeField] private GameObject model;
+    public GameObject Model { get { return model; } }
 
     //武器アイコン
     [SerializeField] private Sprite icon;
+    public Sprite Icon { get { return icon; } }
 
 
     //以下可変数値
     //所持・未所持
     [SerializeField] private bool possession;
+    public bool Possession { get { return possession; } set { possession = value; } }
+
+    //レベル
+    [SerializeField] private byte level;
+    public byte Level { get { return level; }set { level = value; } }
 
     //初速
     [SerializeField] private float speed;
+    public float Speed { get { return speed; } set { speed = value < 0 ? speed : value; } }
 
     //火力
     [SerializeField] private float power;
+    public float Power { get { return power; } set { power = value < 0 ? power : value; } }
 
     //減衰
     [SerializeField] private float attenuation;
+    public float Attenuation { get { return attenuation; } set { attenuation = value < 0 ? attenuation : value; } }
 
     //距離最大値
     [SerializeField] private float distance;
+    public float Disatnce { get { return distance; } set { distance = value < 0 ? distance : value; } }
 
     //リロード時間
     [SerializeField] private float reload;
+    public float Reload { get { return reload; } set { reload = value < 0 ? reload : value; } }
 
     //弾数最大値
     [SerializeField] private int strage;
+    public int Strage { get { return strage; } set { strage = value < 0 ? strage : value; } }
 
     //最大弾丸保持数
     [SerializeField] private int retention;
+    public int Retention { get { return retention; }set { retention = value < 0 ? retention : value; } }
 
     private char cord;
     public byte Cord { private get { return (byte)cord; } set { cord = (char)value; } }
 
-    
-    //プロパティ
-    public WeaponKind Kind { get { return kind; } }
-    public string Name { get { return weaponName; } }
-    public GameObject Model { get { return model; } }
-    public Sprite Icon { get { return icon; } }
-
-    public bool Possession { get { return possession; } set { possession = value; } }
-    public float Speed { get { return speed; } set { speed = value < 0 ? speed : value; } }
-    public float Power { get { return power; } set { power = value < 0 ? power : value; } }
-    public float Attenuation { get { return attenuation; } set { attenuation = value < 0 ? attenuation : value; } }
-    public float Disatnce { get { return distance; } set { distance = value < 0 ? distance : value; } }
-    public float Reload { get { return reload; } set { reload = value < 0 ? reload : value; } }
-    public int Strage { get { return strage; } set { strage = value < 0 ? strage : value; } }
-    public int Retention { get { return retention; }set { retention = value < 0 ? retention : value; } }
 
 
     //セーブ＆ロード
@@ -77,7 +75,7 @@ public class Weapon : ScriptableObject
         PlayerPrefs.SetFloat(cord + "d", distance);
         PlayerPrefs.SetFloat(cord + "r", reload);
 
-        int temp = possession ? (strage + (retention << 16)) : -(strage + (retention << 16));
+        int temp = possession ? (strage + (retention << 12) + (level << 24)) : -(strage + (retention << 12) + (level << 24));
         PlayerPrefs.SetInt(cord + "S", temp);
     }
 
@@ -94,13 +92,15 @@ public class Weapon : ScriptableObject
         {
             possession = false;
             strage = (-temp) & ushort.MaxValue;
-            retention = (-temp) >> 16;
+            retention = ((-temp) >> 12) & ushort.MaxValue;
+            level = (byte)((-temp) >> 24);
         }
         else
         {
             possession = true;
             strage = temp & ushort.MaxValue;
-            retention = temp >> 16;
+            retention = (temp >> 12) & ushort.MaxValue;
+            level = (byte)(temp >> 24);
         }
     }
 }
