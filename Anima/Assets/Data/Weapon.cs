@@ -10,9 +10,6 @@ public class Weapon : ScriptableObject
     //固有値の変更は強化シーン
 
 
-    //武器名
-    [SerializeField] private string weaponName;
-    public string Name { get { return weaponName; } }
 
     //武器の種類(WeaponKind => Dataのenum)
     [SerializeField] private WeaponKind kind;

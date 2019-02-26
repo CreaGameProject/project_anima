@@ -9,25 +9,22 @@ public class Mission : ScriptableObject
 
     //ミッション内容
     [SerializeField] private string content;
+    public string Content { get { return content; } }
 
     //獲物の種類(Pleykind => Dataのenum)
     [SerializeField] private Preykind prey;
+    public Preykind Prey { get { return prey; } }
 
     //開放・未開放
     [SerializeField] private bool open;
+    public bool Open { get { return open; }set { open = value; } }
 
     //報酬
     [SerializeField] private int compensation;
+    public int Compensation { get { return compensation; } }
 
     //獲得素材
     [SerializeField] private Material[] acquisiton;
-
-
-
-    //プロパティ
-    public string Content { get { return content; } }
-    public Preykind Prey { get { return prey; } }
-    public bool Open { get { return open; }set { open = value; } }
-    public int Compensation { get { return compensation; } }
     public Material[] Materials { get { return acquisiton; } }
+    
 }

@@ -45,8 +45,8 @@ public class SelectManager : MonoBehaviour
             default: break;
         }
         Page("s");
-        missions.transform.position += Vector3.right * 320f;
-        levels.transform.position += Vector3.left * 320f;
+        missions.transform.position += Vector3.right * 640f;
+        levels.transform.position += Vector3.left * 640f;
     }
 
     public void ContentGenerator()
