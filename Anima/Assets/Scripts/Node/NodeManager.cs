@@ -12,10 +12,13 @@ public class NodeManager : MonoBehaviour
     {
         currentNode = nodeLibrary.Find(a => a.nodeName == "root");
     }
-
     // Update is called once per frame
     void Update()
     {
         
+    }
+    public void SetLibrary(NodeLibrary nodeLibrary)
+    {
+
     }
 }
