@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class NodeManager : MonoBehaviour
 {
-    public delegate bool NodeEffective();
-    private Node currentNode;
+    private Node curNode;
+    private State curState;
+    private Dictionary<State, NodeLibrary> libraries;
     private List<Node> nodeLibrary = new List<Node>();
-    // Start is called before the first frame update
-    void Start()
+    public NodeManager(Dictionary<State, NodeLibrary> paramLibraries)//コンストラクタ
     {
-        currentNode = nodeLibrary.Find(a => a.nodeName == "root");
+        libraries = paramLibraries;//ノードライブラリコレクションを格納
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    public void SetLibrary(NodeLibrary nodeLibrary)
-    {
 
+    public void SetState(State state)//ステートを強制的に変更し、ビヘイビアツリーをrootノードから開始する。
+    {
+        curState = state;
+        curNode = libraries[curState].nodes.Find(a => a.nodeName == "root");
+        StartCoroutine(NodeSend());
+    }
+
+    private IEnumerator NodeSend()//ノード送り
+    {
+        //memo どうやってウエイトをとるか
+        StartCoroutine(NodeSend());
+        yield break;
     }
 }
