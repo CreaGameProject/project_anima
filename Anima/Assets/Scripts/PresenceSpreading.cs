@@ -48,7 +48,7 @@ public class PresenceSpreading : MonoBehaviour
 
 
     //インスタンス生成
-    MapPropertiesDefiner mapPropertiesDefiner = new MapPropertiesDefiner();
+    //MapPropertiesDefiner mapPropertiesDefiner = new MapPropertiesDefiner();
     InfluenceMap influenceMap;
 
     //読み込み変数
@@ -59,7 +59,7 @@ public class PresenceSpreading : MonoBehaviour
 
     private void Awake()
     {
-        mapRange = mapPropertiesDefiner.mapRange;
+        //mapRange = mapPropertiesDefiner.mapRange;
         influenceMap = new InfluenceMap(mapRange.x, mapRange.y);
         obstacleMap = new float[mapRange.x, mapRange.y];
 

@@ -13,10 +13,9 @@ public abstract class Node : MonoBehaviour
     public List<Node> childNodes = new List<Node>();
     public EvaluateValue evaluateValue;
     public NodeEffective nodeEffective;
-    public Node NodeRun()
-    {
-
-        return NodeSelect();
-    }
-    protected abstract Node NodeSelect();
+    //public Node NodeRun()
+    //{
+    //    return NodeSelect();
+    //}
+    protected abstract Node NodeRun();
 }

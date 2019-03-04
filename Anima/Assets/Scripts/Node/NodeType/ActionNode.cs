@@ -5,15 +5,8 @@ using UnityEngine;
 public class ActionNode : Node
 {
     public bool interruptible;
-    // Start is called before the first frame update
-    void Start()
+    protected override Node NodeRun()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        throw new System.NotImplementedException();
     }
 }

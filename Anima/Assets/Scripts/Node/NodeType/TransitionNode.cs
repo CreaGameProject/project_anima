@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class TransitionNode : Node
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override Node NodeRun()
     {
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        throw new System.NotImplementedException();
     }
 }

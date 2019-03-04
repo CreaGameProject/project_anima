@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class PriorityNode : Node
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override Node NodeRun()
     {
-        
-    }
+        List<Node> nextNode = new List<Node>();//遷移先ノード候補
+        float maxValue = childNodes[0].evaluateValue();//最大評価値を子ノードインデックス0で初期化
+        foreach(Node node in childNodes)//最大評価値を更新
+        {
+            if(node.evaluateValue() > maxValue)
+            {
+                maxValue = node.evaluateValue();
+            }
+        }
+        nextNode = childNodes.FindAll(n => n.evaluateValue() == maxValue);//遷移先ノードを格納
+        return nextNode[Random.Range(0,nextNode.Count)];//一つに絞り込む
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //throw new System.NotImplementedException();
     }
 }
