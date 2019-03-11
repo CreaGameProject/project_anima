@@ -55,7 +55,7 @@ public abstract class PreyStatus : MonoBehaviour
     private void NodeManagerSetup()//ビヘイビアツリー(NodeManager)を開始するための関数
     {
         nodeManager = new NodeManager(nodeLibraries);//nodeManagerインスタンスを宣言、コンストラクタからノードライブラリを登録
-        nodeManager.SetState(State.EXPLORING);
+        nodeManager.SetState(State.EXPLORING);//ステートの変更、ルートノードより開始。
     }
     #endregion
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class NodeLibrary : MonoBehaviour
+public abstract class NodeLibrary : MonoBehaviour//NodeLibraryインスタンス1つにつきツリー1つを格納
 {
     public NodeLibrary()//コンストラクタ
     {
