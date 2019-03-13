@@ -23,6 +23,12 @@ public class NodeManager : MonoBehaviour
     private IEnumerator NodeSend()//ノード送り
     {
         //memo どうやってウエイトをとるか
+        //そもそもウエイトいるの？
+        //ウエイトをとるノード→アクションノードのみ
+        //基本的にアクションノードはそのまま次に進めた上で必要なのはトランジョン、怯み等の受付のみ
+        //
+        //
+        
         StartCoroutine(NodeSend());
         yield break;
     }
