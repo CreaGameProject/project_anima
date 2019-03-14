@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 [Serializable]
@@ -20,8 +21,8 @@ public class Weapon : ScriptableObject
     public GameObject Model { get { return model; } }
 
     //武器アイコン
-    [SerializeField] private Sprite icon;
-    public Sprite Icon { get { return icon; } }
+    [SerializeField] private RawImage icon;
+    public RawImage Icon { get { return icon; } }
 
 
     //以下可変数値
