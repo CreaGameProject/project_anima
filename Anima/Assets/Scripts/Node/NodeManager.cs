@@ -29,7 +29,7 @@ public class NodeManager : MonoBehaviour
         //
         //オーバーロード
         //
-        
+
         StartCoroutine(NodeSend());
         yield break;
     }

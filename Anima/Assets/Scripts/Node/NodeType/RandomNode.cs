@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RandomNode : Node
 {
+    public RandomNode(string nodeName, string parentNodeName, EvaluateValue evaluateValue, NodeEffective nodeEffective) : base(nodeName, parentNodeName, evaluateValue, nodeEffective) { }
+
     protected override Node NodeRun()
     {
         float denominator = 0;//子ノードの評価値合計

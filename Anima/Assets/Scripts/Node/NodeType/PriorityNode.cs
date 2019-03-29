@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class PriorityNode : Node
 {
-    PriorityNode()
-    {
-
-    }
+    public PriorityNode(string nodeName, string parentNodeName, EvaluateValue evaluateValue, NodeEffective nodeEffective) : base(nodeName, parentNodeName, evaluateValue, nodeEffective) { }
 
     protected override Node NodeRun()
     {
@@ -23,6 +20,6 @@ public class PriorityNode : Node
         nextNode = childNodes.FindAll(n => n.evaluateValue() == maxValue);//遷移先ノードを格納
         return nextNode[Random.Range(0,nextNode.Count)];//一つに絞り込む
 
-        //throw new System.NotImplementedException();
+        throw new System.NotImplementedException();//例外処理
     }
 }

@@ -6,16 +6,15 @@ public class TransitionNode : Node
 {
     State nextState;
 
-    TransitionNode(string nodeName, string parentNodeName, State nextState)
+    TransitionNode(string nodeName, string parentNodeName, EvaluateValue evaluateValue, NodeEffective nodeEffective, State nextState) : base(nodeName, parentNodeName, evaluateValue, nodeEffective)
     {
-        this.nodeName = nodeName;
-        this.parentNodeName = parentNodeName;
         this.nextState = nextState;
     }
 
     protected override Node NodeRun()
     {
         preyStatus.nodeManager.SetState(nextState);
+        return null;
 
         throw new System.NotImplementedException();
     }

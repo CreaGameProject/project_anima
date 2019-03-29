@@ -7,6 +7,14 @@ public delegate bool NodeEffective();
 
 public abstract class Node : MonoBehaviour
 {
+    protected Node(string nodeName, string parentNodeName, EvaluateValue evaluateValue, NodeEffective nodeEffective)
+    {
+        this.nodeName = nodeName;
+        this.parentNodeName = parentNodeName;
+        this.evaluateValue = evaluateValue;
+        this.nodeEffective = nodeEffective;
+    }
+
     //コンストラクタで初期化
     public string nodeName;//ノードの名前
     public string parentNodeName;//親ノード名前
