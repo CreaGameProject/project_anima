@@ -28,7 +28,7 @@ public abstract class PreyStatus : MonoBehaviour
     //public Dictionary<EnvSpot, float> satisfy;//満足度
     public Dictionary<State, NodeLibrary> nodeLibraries = new Dictionary<State, NodeLibrary>();//ノードライブラリとステートを関連付け、コレクションに格納
 
-    private NodeManager nodeManager;//ノードの管理、現在のノードの情報保持など
+    public NodeManager nodeManager;//ノードの管理、現在のノードの情報保持など
 
     // Start is called before the first frame update
     void Start()

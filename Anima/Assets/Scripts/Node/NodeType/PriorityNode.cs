@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PriorityNode : Node
 {
+    PriorityNode()
+    {
+
+    }
+
     protected override Node NodeRun()
     {
         List<Node> nextNode = new List<Node>();//遷移先ノード候補

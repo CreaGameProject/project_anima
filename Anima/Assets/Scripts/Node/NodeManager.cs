@@ -27,6 +27,7 @@ public class NodeManager : MonoBehaviour
         //ウエイトをとるノード→アクションノードのみ
         //基本的にアクションノードはそのまま次に進めた上で必要なのはトランジョン、怯み等の受付のみ
         //
+        //オーバーロード
         //
         
         StartCoroutine(NodeSend());
