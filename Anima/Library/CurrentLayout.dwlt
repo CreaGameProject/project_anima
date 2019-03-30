@@ -115,7 +115,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 498}
   m_MaxSize: {x: 18008, y: 14048}
   vertical: 0
-  controlID: 44
+  controlID: 155
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 348}
   m_MaxSize: {x: 4002, y: 8048}
   vertical: 1
-  controlID: 13
+  controlID: 63
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 498}
   m_MaxSize: {x: 10004, y: 14048}
   vertical: 1
-  controlID: 57
+  controlID: 95
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -556,9 +556,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 682a0000
+      m_SelectedIDs: 74090000
       m_LastClickedID: 0
-      m_ExpandedIDs: ecf3ffff
+      m_ExpandedIDs: befbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -626,14 +626,14 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/Scripts/Node/NodeType
   m_LastFoldersGridSize: 16
-  m_LastProjectPath: C:\Users\Lycolet\Documents\GitHub\project_anima\Anima
+  m_LastProjectPath: Z:\ProjectData\GitHub\project_anima\Anima
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c42b0000
-    m_LastClickedID: 11204
-    m_ExpandedIDs: 00000000b22b00003c2c00006e2c0000e02c000000ca9a3b
+    m_SelectedIDs: 70260000
+    m_LastClickedID: 9840
+    m_ExpandedIDs: 00000000442600000227000034270000a627000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -661,7 +661,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000b22b00003c2c00006e2c0000e02c0000
+    m_ExpandedIDs: 00000000442600000227000034270000a6270000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -692,18 +692,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: 5c2700000e0f00007c0f0000000000000c0a0000680a0000842d0000ec0a000098090000862d00009c2d0000ee0a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Node
-      m_OriginalName: Node
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 10856
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 11}
     m_CreateAssetUtility:
