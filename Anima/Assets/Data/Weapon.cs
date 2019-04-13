@@ -2,9 +2,10 @@
 using UnityEngine.UI;
 using System;
 
+public enum WeaponKind { Rifle, Shotgun };
+
 [Serializable]
 [CreateAssetMenu(fileName = "Weapon", menuName = "CreateWeapon")]
-
 public class Weapon : ScriptableObject
 {
     //武器に関する固有値
@@ -12,7 +13,7 @@ public class Weapon : ScriptableObject
 
 
 
-    //武器の種類(WeaponKind => Dataのenum)
+    //武器の種類
     [SerializeField] private WeaponKind kind;
     public WeaponKind Kind { get { return kind; } }
 
@@ -61,48 +62,5 @@ public class Weapon : ScriptableObject
     //最大弾丸保持数
     [SerializeField] private int retention;
     public int Retention { get { return retention; }set { retention = value < 0 ? retention : value; } }
-
-    private char cord;
-    public byte Cord { private get { return (byte)cord; } set { cord = (char)value; } }
-
-
-
-    //セーブ＆ロード
-    public void Save()
-    {
-        PlayerPrefs.SetFloat(cord + "s", speed);
-        PlayerPrefs.SetFloat(cord + "p", power);
-        PlayerPrefs.SetFloat(cord + "a", attenuation);
-        PlayerPrefs.SetFloat(cord + "d", distance);
-        PlayerPrefs.SetFloat(cord + "r", reload);
-
-        int temp = possession ? (strage + (retention << 12) + (level << 24)) : -(strage + (retention << 12) + (level << 24));
-        PlayerPrefs.SetInt(cord + "S", temp);
-    }
-
-    public void Load()
-    {
-        speed = PlayerPrefs.GetFloat(cord + "s", speed);
-        power = PlayerPrefs.GetFloat(cord + "p", power);
-        attenuation = PlayerPrefs.GetFloat(cord + "a", attenuation);
-        distance = PlayerPrefs.GetFloat(cord + "d", distance);
-        reload = PlayerPrefs.GetFloat(cord + "r", reload);
-
-        int temp = PlayerPrefs.GetInt(cord + "S", -strage);
-        if (temp < 0)
-        {
-            possession = false;
-            strage = (-temp) & ushort.MaxValue;
-            retention = ((-temp) >> 12) & ushort.MaxValue;
-            level = (byte)((-temp) >> 24);
-        }
-        else
-        {
-            possession = true;
-            strage = temp & ushort.MaxValue;
-            retention = (temp >> 12) & ushort.MaxValue;
-            level = (byte)(temp >> 24);
-        }
-    }
 }
 

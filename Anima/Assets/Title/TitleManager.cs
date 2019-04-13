@@ -4,7 +4,9 @@ public class TitleManager: MonoBehaviour {
     
     public void ToBase()
     {
-        GameObject.Find("GameManager").GetComponent<Data>().LoadData();
+        DataSave.WeaponLoad();
+        DataSave.FixtureLoad();
+        DataSave.MissionLoad();
         SceneMigration.Migrate(AnimaScene.Base);
     }
 

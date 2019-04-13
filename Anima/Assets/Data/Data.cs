@@ -1,129 +1,71 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 
-public enum WeaponKind { Rifle, Shotgun };
-public enum Preykind { Deer, Bear, Boar };
-public enum ItemName { RifleBullet,ShotgunBullet};
-public enum MaterialName { Money};
 
 
 public class Data : MonoBehaviour
 {
+    public static Data Instance;
+
+    public static Dictionary<string, Weapon> Weapons = new Dictionary<string, Weapon>();
     public Weapon[] weapons;
+
+    public static Dictionary<string, Item> Items = new Dictionary<string, Item>();
+    public Item[] items;
+
+    public static Dictionary<string, Material> Materials = new Dictionary<string, Material>();
+    public Material[] materials;
+
     public Level[] levels;
-    public Item[] Items;
-    public Material[] Materials;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
+        for (int i = 0; i < weapons.Length; i++)
+        {
+            if (!Weapons.ContainsKey(weapons[i].name))
+            {
+                Weapons.Add(weapons[i].name, weapons[i]);
+            }
+        }
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (!Items.ContainsKey(items[i].name))
+            {
+                Items.Add(items[i].name, items[i]);
+            }
+        }
+        for (int i = 0; i < materials.Length; i++)
+        {
+            if (!Materials.ContainsKey(materials[i].name))
+            {
+                Materials.Add(materials[i].name, materials[i]);
+            }
+        }
+    }
 
     public Weapon MainWeapon;
     public Weapon SubWeapon;
     public Mission selectedMission;
     public Item[] takeItems;
-
-
-    //データのセーブ
-    public void SaveData()
-    {
-        foreach(Weapon w in weapons)
-        {
-            w.Save();
-        }
-        for(int k = 0; k < levels.Length; k++)
-        {
-            int temp = 0;
-            for (byte i = 0; i < levels.Length; i++)
-            {
-                if (levels[i].Open)
-                {
-                    temp += (1 << i);
-                }
-            }
-            PlayerPrefs.SetInt("l", temp);
-        }
-        foreach(Level l in levels)
-        {
-            l.Save();
-        }
-        foreach(Item i in Items)
-        {
-            i.Save();
-        }
-        foreach(Material m in Materials)
-        {
-            m.Save();
-        }
-
-        PlayerPrefs.Save();
-    }
-
-    //データのロード
-    public void LoadData()
-    {
-        for (byte w = 0; w < weapons.Length; w++)
-        {
-            weapons[w].Cord = w;
-            weapons[w].Load();
-        }
-        int temp = PlayerPrefs.GetInt("l", 1);
-        for (byte i = 0; i < levels.Length; i++)
-        {
-            levels[i].Cord = i;
-            if ((temp >> i) == 1)
-            {
-                levels[i].Open = true;
-            }
-        }
-        foreach (Level l in levels)
-        {
-            l.Load ();
-        }
-        for (byte i = 0; i < Items.Length; i++)
-        {
-            Items[i].Cord = i;
-            Items[i].Load();
-        }
-        for (byte m = 0; m < Materials.Length; m++)
-        {
-            Materials[m].Cord = m;
-            Materials[m].Load();
-        }
-    }
 }
 
 [Serializable]
 public class Level
 {
-    private char cord;
-    public byte Cord { private get { return (byte)cord; } set { cord = (char)value; } }
-    public Mission[] missions;
     [SerializeField] private bool open;
+    [HideInInspector] public bool[] missionOpen;
+    public Mission[] missions;
 
     public bool Open { get { return open; } set { open = value; } }
-
-    public void Save()
-    {
-        int temp = 0;
-        for (byte i = 0; i < missions.Length; i++)
-        {
-            if (missions[i].Open)
-            {
-                temp += (1 << i);
-            }
-        }
-
-        PlayerPrefs.SetInt("l" + cord, temp);
-    }
-
-    public void Load()
-    {
-        int temp = PlayerPrefs.GetInt("l" + cord, 0);
-
-        for (byte i = 0; i < missions.Length; i++)
-        {
-            if ((temp >> i) == 1)
-            {
-                missions[i].Open = true;
-            }
-        }
-    }
 }

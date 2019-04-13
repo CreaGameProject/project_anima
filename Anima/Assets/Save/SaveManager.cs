@@ -8,7 +8,9 @@ public class SaveManager : MonoBehaviour {
 
     public void Save()
     {
-        GameObject.Find("GameManager").GetComponent<Data>().SaveData();
+        DataSave.WeaponSave();
+        DataSave.FixtureSave();
+        DataSave.MissionSave();
         monitor1.SetActive(false);
         monitor2.SetActive(true);
     }

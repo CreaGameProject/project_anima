@@ -14,20 +14,4 @@ public class Item : ScriptableObject
     //数
     [SerializeField] private int number;
     public int Number { get { return number; }set { number = value < 0 ? 0 : value; } }
-
-    private char cord;
-    public byte Cord { private get { return (byte)cord; } set { cord = (char)value; } }
-    
-
-
-    //セーブ＆ロード
-    public void Save()
-    {
-        PlayerPrefs.SetInt("i" + cord, number);
-    }
-
-    public void Load()
-    {
-        PlayerPrefs.GetInt("i" + cord, 0);
-    }
 }

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System;
 
+public enum Preykind { Deer, Bear, Boar };
+
 [Serializable]
 [CreateAssetMenu(fileName = "Mission", menuName = "CreateMission")]
 public class Mission : ScriptableObject
