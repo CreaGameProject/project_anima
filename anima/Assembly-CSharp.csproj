@@ -70,6 +70,10 @@
     <Compile Include="Assets\Data\Mission.cs" />
     <Compile Include="Assets\Data\Weapon.cs" />
     <Compile Include="Assets\Mission\MissionManager.cs" />
+    <Compile Include="Assets\Mission\Test\B_u_l_l_e_t.cs" />
+    <Compile Include="Assets\Mission\Test\E_n_e_m_y.cs" />
+    <Compile Include="Assets\Mission\Test\P_l_a_y_e_r.cs" />
+    <Compile Include="Assets\Mission\Test\T_e_x_t.cs" />
     <Compile Include="Assets\Save\SaveManager.cs" />
     <Compile Include="Assets\SceneMigration.cs" />
     <Compile Include="Assets\Select\MissionContent.cs" />

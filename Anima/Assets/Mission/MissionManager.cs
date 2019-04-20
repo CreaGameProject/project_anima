@@ -5,7 +5,6 @@ using System;
 
 public class MissionManager : MonoBehaviour
 {
-    private Data data;
     public float damage;
     [SerializeField] private RawImage MainIcon;
     [SerializeField] private RawImage SubIcon;
@@ -17,9 +16,8 @@ public class MissionManager : MonoBehaviour
 
     private void Start()
     {
-        data = GameObject.Find("GameManager").GetComponent<Data>();
-        MainIcon = data.MainWeapon.Icon;
-        SubIcon = data.SubWeapon.Icon;
+        MainIcon = Data.Instance.MainWeapon.Icon;
+        SubIcon = Data.Instance.SubWeapon.Icon;
         taxikeaCount = 3;
         start = DateTime.Now;
     }
