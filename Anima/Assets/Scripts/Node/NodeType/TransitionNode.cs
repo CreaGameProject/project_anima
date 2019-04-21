@@ -6,15 +6,25 @@ public class TransitionNode : Node
 {
     State nextState;
 
-    TransitionNode(string nodeName, string parentNodeName, EvaluateValue evaluateValue, NodeEffective nodeEffective, State nextState) : base(nodeName, parentNodeName, evaluateValue, nodeEffective)
+    TransitionNode(
+        string nodeName, 
+        string parentNodeName, 
+        EvaluateValue evaluateValue, 
+        NodeEffective nodeEffective, 
+        State nextState
+        ) : base(
+            nodeName, 
+            parentNodeName, 
+            evaluateValue, 
+            nodeEffective)
     {
         this.nextState = nextState;
     }
 
-    protected override Node NodeRun()
+    public override Node NodeRun()
     {
-        preyStatus.nodeManager.SetState(nextState);
-        return null;
+        preyStatus.nodeManager.SetState(nextState);//優先度の考察が必要あり
+        return this;
 
         throw new System.NotImplementedException();
     }

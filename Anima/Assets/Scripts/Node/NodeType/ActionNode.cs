@@ -2,17 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class Action
+{
+    //内容は未定、アクションノードがPreyStatusの行動予約を変えるために渡すクラス
+}
+
 public class ActionNode : Node
 {
-    bool interruptible;
+    int priority;
 
-    public ActionNode(string nodeName, string parentNodeName, EvaluateValue evaluateValue, NodeEffective nodeEffective, bool interruptible) : base(nodeName, parentNodeName, evaluateValue, nodeEffective)
+    public ActionNode(
+        string nodeName, 
+        string parentNodeName, 
+        EvaluateValue evaluateValue, 
+        NodeEffective nodeEffective, 
+        int priority
+        ) : base(
+            nodeName, 
+            parentNodeName, 
+            evaluateValue, 
+            nodeEffective)
     {
-        this.interruptible = interruptible;
+        this.priority = priority;
     }
 
-    protected override Node NodeRun()
+    public override Node NodeRun()
     {
-        throw new System.NotImplementedException();
+        return this;
     }
 }

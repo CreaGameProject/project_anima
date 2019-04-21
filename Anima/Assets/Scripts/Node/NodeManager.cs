@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class NodeManager : MonoBehaviour
 {
+    private int frameSkip = 5;
     private Node curNode;
-    private State curState;
+    public State curState { private set; get; }
     private Dictionary<State, NodeLibrary> libraries;
     private List<Node> nodeLibrary = new List<Node>();
     public NodeManager(Dictionary<State, NodeLibrary> paramLibraries)//コンストラクタ
@@ -22,15 +23,11 @@ public class NodeManager : MonoBehaviour
 
     private IEnumerator NodeSend()//ノード送り
     {
-        //memo どうやってウエイトをとるか
-        //そもそもウエイトいるの？
-        //ウエイトをとるノード→アクションノードのみ
-        //基本的にアクションノードはそのまま次に進めた上で必要なのはトランジョン、怯み等の受付のみ
-        //
-        //オーバーロード
-        //
-
-        StartCoroutine(NodeSend());
+        curNode = curNode.NodeRun();
+        //再帰的にノードを連結させ、リーフノード(Action, Transition)にたどり着けばそのノード自体を返す。
+        //探索は一瞬で終わるものと仮定して確認は行わない
+        yield return new WaitForSeconds(frameSkip / 60);
+        SetState(curState);
         yield break;
     }
 }

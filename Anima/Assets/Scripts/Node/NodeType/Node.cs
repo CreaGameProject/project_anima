@@ -7,7 +7,7 @@ public delegate bool NodeEffective();
 
 public abstract class Node : MonoBehaviour
 {
-    protected Node(string nodeName, string parentNodeName, EvaluateValue evaluateValue, NodeEffective nodeEffective)
+    public Node(string nodeName, string parentNodeName, EvaluateValue evaluateValue, NodeEffective nodeEffective)
     {
         this.nodeName = nodeName;
         this.parentNodeName = parentNodeName;
@@ -27,5 +27,5 @@ public abstract class Node : MonoBehaviour
     public List<Node> childNodes = new List<Node>();
 
     //継承先で次のノード選択、実行を記述
-    protected abstract Node NodeRun();
+    public abstract Node NodeRun();
 }
