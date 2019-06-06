@@ -8,7 +8,7 @@ public class MissionManager : MonoBehaviour
     public float damage;
     [SerializeField] private RawImage MainIcon;
     [SerializeField] private RawImage SubIcon;
-    private byte taxikeaCount;
+    [SerializeField] private GameObject clear;
 
     //制限時間管理(タキサイキアに影響されない)
     private DateTime start;
@@ -18,7 +18,6 @@ public class MissionManager : MonoBehaviour
     {
         MainIcon = Data.Instance.MainWeapon.Icon;
         SubIcon = Data.Instance.SubWeapon.Icon;
-        taxikeaCount = 3;
         start = DateTime.Now;
     }
 
@@ -38,25 +37,20 @@ public class MissionManager : MonoBehaviour
         SceneMigration.Migrate(AnimaScene.Compensation);
     }
 
-    public IEnumerator Taxikea()
+
+    public void MissionClear()
     {
-        if (taxikeaCount > 0)
-        {
-            //主人公の能力値が変わったり、
-            //環境変化があったり
-            Time.timeScale = 0.2f;
-
-            yield return new WaitForSecondsRealtime(7f);
-
-            //元に戻す。
-            Time.timeScale = 1f;
-            taxikeaCount--;
-        }
+        StartCoroutine("ClearCoroutine");
     }
 
-    private IEnumerator EndMission()
+    private IEnumerator ClearCoroutine()
     {
-        yield return new WaitForSeconds(30f);
-        //ゲーム終了
+        clear.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        clear.GetComponentInChildren<Text>().text = "あと30秒で帰還します。";
+        yield return new WaitForSeconds(5f);
+        clear.SetActive(false);
+        yield return new WaitForSeconds(25f);
+        ToCompensation();
     }
 }

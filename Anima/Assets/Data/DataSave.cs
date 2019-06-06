@@ -83,16 +83,17 @@ public class DataSave : MonoBehaviour
 
         LoadMethod("/Data/missions.json", missions);
 
+        missions.isOpened = new bool[4,16];
         int levelsLength = missions.isOpened.GetLength(0);
 
         for (int i = 0; i < levelsLength; i++)
         {
             int missionslength = missions.isOpened.GetLength(1);
-            Data.Instance.levels[i].Open = missions.isOpened[i][0];
+            Data.Instance.levels[i].Open = missions.isOpened[i,0];
 
             for (int j = 1; j < missionslength; j++)
             {
-                Data.Instance.levels[i].missions[j - 1].Open = missions.isOpened[i][j];
+                Data.Instance.levels[i].missions[j - 1].Open = missions.isOpened[i,j];
             }
         }
     }
@@ -120,7 +121,7 @@ public class DataSave : MonoBehaviour
 [Serializable]
 public class MissionData
 {
-    public bool[][] isOpened;
+    public bool[,] isOpened;
 }
 
 [Serializable]

@@ -48,9 +48,11 @@ public class E_n_e_m_y : MonoBehaviour
         }
     }
 
+    //クリアした瞬間
     private void OnCollisionEnter(Collision collision)
     {
         GetComponent<MeshRenderer>().materials[0].color = Color.red;
         state = 2;
+        GameObject.Find("MissionManager").GetComponent<MissionManager>().MissionClear();
     }
 }
