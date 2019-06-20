@@ -1,8 +1,1 @@
-sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Other/FixtureHome.unity
-=======
-- path: Assets/Title/Title.unity
->>>>>>> ff07a91b8619c004ea503f765e77176c1a4403ab
-  isLoaded: 1
-  isActive: 1
+sceneSetups: []
