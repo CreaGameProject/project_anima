@@ -32,24 +32,15 @@ public class DataSave : MonoBehaviour
 
     public static void MissionSave()
     {
-        MissionData missions = new MissionData();
-
-        int levelsLength = Data.Instance.levels.Length;
-        missions.isOpened = new bool[levelsLength][];
-
-        for(int i = 0; i < levelsLength; i++)
+        for (int i = 0; i < 4; i++)
         {
-            int missionsLength = Data.Instance.levels[i].missions.Length + 1;
-            missions.isOpened[i] = new bool[missionsLength];
-            missions.isOpened[i][0] = Data.Instance.levels[i].Open;
-
-            for (int j = 1; j < missionsLength; j++)
+            Data.Instance.levels[i].missionOpen = new bool[Data.Instance.levels[i].missions.Length];
+            for (int j = 0; j < Data.Instance.levels[i].missions.Length; j++)
             {
-                missions.isOpened[i][j] = Data.Instance.levels[i].missions[j - 1].Open;
+                Data.Instance.levels[i].missionOpen[j] = Data.Instance.levels[i].missions[j].Open;
             }
+            SaveMethod("/Data/level"+(i+1).ToString()+".json", Data.Instance.levels[i]);
         }
-
-        SaveMethod("/Data/missions.json", missions);
     }
 
 
@@ -79,21 +70,14 @@ public class DataSave : MonoBehaviour
 
     public static void MissionLoad()
     {
-        MissionData missions = new MissionData();
-
-        LoadMethod("/Data/missions.json", missions);
-
-        missions.isOpened = new bool[4,16];
-        int levelsLength = missions.isOpened.GetLength(0);
-
-        for (int i = 0; i < levelsLength; i++)
+        for (int i = 0; i < 4; i++)
         {
-            int missionslength = missions.isOpened.GetLength(1);
-            Data.Instance.levels[i].Open = missions.isOpened[i,0];
+            Data.Instance.levels[i].missionOpen = new bool[Data.Instance.levels[i].missions.Length];
+            LoadMethod("/Data/level" + (i + 1).ToString() + ".json", Data.Instance.levels[i]);
 
-            for (int j = 1; j < missionslength; j++)
+            for (int j = 0; j < Data.Instance.levels[i].missions.Length; j++)
             {
-                Data.Instance.levels[i].missions[j - 1].Open = missions.isOpened[i,j];
+                Data.Instance.levels[i].missions[j].Open = Data.Instance.levels[i].missionOpen[j];
             }
         }
     }
@@ -116,12 +100,6 @@ public class DataSave : MonoBehaviour
         var json = reader.ReadToEnd();
         JsonUtility.FromJsonOverwrite(json, data);
     }
-}
-
-[Serializable]
-public class MissionData
-{
-    public bool[,] isOpened;
 }
 
 [Serializable]
