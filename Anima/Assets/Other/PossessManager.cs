@@ -12,6 +12,16 @@ public class PossessManager : MonoBehaviour
     //テキスト取得
     [SerializeField] UnityEngine.UI.Text showbox;
 
+    void PossessBullet()
+    {
+
+    }
+
+    void PossessMaterials()
+    {
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {

@@ -9,6 +9,16 @@ public class PurchaseManager : MonoBehaviour
     //PossessMaterials()参照元
     //ReturnFixtureHome()public→FixtureManagerクラス
 
+    void PossessBullet()
+    {
+
+    }
+
+    void PossessMaterials()
+    {
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +30,7 @@ public class PurchaseManager : MonoBehaviour
     {
         
     }
-
+    //多分いらないよねー
     public static void BulletNumbers(int[] bulletNumber)
     {
 

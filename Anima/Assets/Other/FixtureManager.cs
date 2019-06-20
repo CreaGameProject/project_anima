@@ -9,6 +9,11 @@ public class FixtureManager : MonoBehaviour
     //ToBase()public→SceneMigrationクラス
     //ReturnFixtureHome()参照元public
 
+    public void ReturnFixtureHome()
+    {
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
