@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class CompensationManager : MonoBehaviour
 {
     [SerializeField] private GameObject monitor1;
+
     [SerializeField] private GameObject monitor2;
     [SerializeField] private GameObject buttonPrefab;
     private Transform materialParent;

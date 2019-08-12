@@ -12,7 +12,11 @@ GameObject:
   - component: {fileID: 1439109005961772010}
   - component: {fileID: 1439109005961772013}
   m_Layer: 0
+<<<<<<< HEAD
   m_Name: GameManagerClone
+=======
+  m_Name: GameManager
+>>>>>>> 3c3171ccf20f70ced6f360bdb23e8969467cbbbc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,7 +102,10 @@ MonoBehaviour:
   MainWeapon: {fileID: 0}
   SubWeapon: {fileID: 0}
   selectedMission: {fileID: 0}
+<<<<<<< HEAD
   takeItems: []
+=======
+>>>>>>> 3c3171ccf20f70ced6f360bdb23e8969467cbbbc
 --- !u!114 &1439109005961772013
 MonoBehaviour:
   m_ObjectHideFlags: 0

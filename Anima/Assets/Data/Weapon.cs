@@ -22,8 +22,13 @@ public class Weapon : ScriptableObject
     public GameObject Model { get { return model; } }
 
     //武器アイコン
+<<<<<<< HEAD
     [SerializeField] private RawImage icon;
     public RawImage Icon { get { return icon; } }
+=======
+    [SerializeField] private Sprite icon;
+    public Sprite Icon { get { return icon; } }
+>>>>>>> 3c3171ccf20f70ced6f360bdb23e8969467cbbbc
 
 
     //以下可変数値
@@ -62,5 +67,51 @@ public class Weapon : ScriptableObject
     //最大弾丸保持数
     [SerializeField] private int retention;
     public int Retention { get { return retention; }set { retention = value < 0 ? retention : value; } }
+<<<<<<< HEAD
+=======
+
+    private char cord;
+    public byte Cord { private get { return (byte)cord; } set { cord = (char)value; } }
+
+
+
+    //セーブ＆ロード
+    public void Save()
+    {
+        PlayerPrefs.SetFloat(cord + "s", speed);
+        PlayerPrefs.SetFloat(cord + "p", power);
+        PlayerPrefs.SetFloat(cord + "a", attenuation);
+        PlayerPrefs.SetFloat(cord + "d", distance);
+        PlayerPrefs.SetFloat(cord + "r", reload);
+
+        int temp = possession ? (strage + (retention << 12) + (level << 24)) : -(strage + (retention << 12) + (level << 24));
+        PlayerPrefs.SetInt(cord + "S", temp);
+    }
+
+    public void Load()
+    {
+        speed = PlayerPrefs.GetFloat(cord + "s", speed);
+        power = PlayerPrefs.GetFloat(cord + "p", power);
+        attenuation = PlayerPrefs.GetFloat(cord + "a", attenuation);
+        distance = PlayerPrefs.GetFloat(cord + "d", distance);
+        reload = PlayerPrefs.GetFloat(cord + "r", reload);
+
+        int temp = PlayerPrefs.GetInt(cord + "S", -strage);
+        if (temp < 0)
+        {
+            possession = false;
+            strage = (-temp) & ushort.MaxValue;
+            retention = ((-temp) >> 12) & ushort.MaxValue;
+            level = (byte)((-temp) >> 24);
+        }
+        else
+        {
+            possession = true;
+            strage = temp & ushort.MaxValue;
+            retention = (temp >> 12) & ushort.MaxValue;
+            level = (byte)(temp >> 24);
+        }
+    }
+>>>>>>> 3c3171ccf20f70ced6f360bdb23e8969467cbbbc
 }
 

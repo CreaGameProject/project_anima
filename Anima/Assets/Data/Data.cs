@@ -10,8 +10,15 @@ public class Data : MonoBehaviour
     public static Dictionary<string, Weapon> Weapons = new Dictionary<string, Weapon>();
     public Weapon[] weapons;
 
+<<<<<<< HEAD
     public static Dictionary<string, Item> Items = new Dictionary<string, Item>();
     public Item[] items;
+=======
+    public Weapon MainWeapon;
+    public Weapon SubWeapon;
+    public Mission selectedMission;
+    public Item[] takeItems;
+>>>>>>> 3c3171ccf20f70ced6f360bdb23e8969467cbbbc
 
     public static Dictionary<string, Material> Materials = new Dictionary<string, Material>();
     public Material[] materials;
