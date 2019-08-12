@@ -77,7 +77,6 @@
     <Compile Include="Assets\Mission\Test\E_n_e_m_y.cs" />
     <Compile Include="Assets\Mission\Test\P_l_a_y_e_r.cs" />
     <Compile Include="Assets\Mission\Test\T_e_x_t.cs" />
-    <Compile Include="Assets\Other\MissionManager.cs" />
     <Compile Include="Assets\PossessManager.cs" />
     <Compile Include="Assets\PurchaseManager.cs" />
     <Compile Include="Assets\Save\SaveManager.cs" />
@@ -301,11 +300,17 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.0a9/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.0a9/Editor/Data/UnityExtensions/Unity/GUISystem/Standalone/UnityEngine.UI.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.TestRunner">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.0a9/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.0a9/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.0a9/Editor/Data/UnityExtensions/Unity/TestRunner/portable/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>C:/Users/Yuga/Documents/GitHub/project_anima/Anima/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.dll</HintPath>

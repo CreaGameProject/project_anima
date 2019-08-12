@@ -22,13 +22,8 @@ public class Weapon : ScriptableObject
     public GameObject Model { get { return model; } }
 
     //武器アイコン
-<<<<<<< HEAD
     [SerializeField] private RawImage icon;
     public RawImage Icon { get { return icon; } }
-=======
-    [SerializeField] private Sprite icon;
-    public Sprite Icon { get { return icon; } }
->>>>>>> 3c3171ccf20f70ced6f360bdb23e8969467cbbbc
 
 
     //以下可変数値
@@ -67,8 +62,6 @@ public class Weapon : ScriptableObject
     //最大弾丸保持数
     [SerializeField] private int retention;
     public int Retention { get { return retention; }set { retention = value < 0 ? retention : value; } }
-<<<<<<< HEAD
-=======
 
     private char cord;
     public byte Cord { private get { return (byte)cord; } set { cord = (char)value; } }
@@ -112,6 +105,5 @@ public class Weapon : ScriptableObject
             level = (byte)(temp >> 24);
         }
     }
->>>>>>> 3c3171ccf20f70ced6f360bdb23e8969467cbbbc
 }
 
