@@ -13,9 +13,17 @@ public class Mission : ScriptableObject
     [SerializeField] private string content;
     public string Content { get { return content; } }
 
+    //制限時間
+    [SerializeField] private float limit;
+    public float Limit { get { return limit; } set { limit = value; } }
+
     //獲物の種類(Pleykind => Dataのenum)
     [SerializeField] private Preykind prey;
     public Preykind Prey { get { return prey; } }
+
+    //獲物の数
+    [SerializeField] private int number;
+    public int Number { get { return number; } set { number = value; } }
 
     //開放・未開放
     [SerializeField] private bool open;

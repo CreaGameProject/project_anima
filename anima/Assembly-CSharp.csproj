@@ -84,26 +84,20 @@
     <Compile Include="Assets\Select\MissionContent.cs" />
     <Compile Include="Assets\Select\SelectManager.cs" />
     <Compile Include="Assets\Title\TitleManager.cs" />
-    <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/Yuga/Documents/GitHub/project_anima/Anima/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/Yuga/Documents/GitHub/project_anima/Anima/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/Yuga/Documents/GitHub/project_anima/Anima/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>C:/Users/Yuga/Documents/GitHub/project_anima/Anima/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Yuga/Documents/GitHub/project_anima/Anima/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Editor">
       <HintPath>C:/Users/Yuga/Documents/GitHub/project_anima/Anima/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>C:/Users/Yuga/Documents/GitHub/project_anima/Anima/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>C:/Users/Yuga/Documents/GitHub/project_anima/Anima/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.CollabProxy.Editor">
+      <HintPath>C:/Users/Yuga/Documents/GitHub/project_anima/Anima/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-weaver.Editor">
       <HintPath>C:/Users/Yuga/Documents/GitHub/project_anima/Anima/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
@@ -119,6 +113,12 @@
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Users/Yuga/Documents/GitHub/project_anima/Anima/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>C:/Users/Yuga/Documents/GitHub/project_anima/Anima/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.DataPrivacy">
+      <HintPath>C:/Users/Yuga/Documents/GitHub/project_anima/Anima/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Runtime">
       <HintPath>C:/Users/Yuga/Documents/GitHub/project_anima/Anima/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
@@ -300,17 +300,11 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.0a9/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.0a9/Editor/Data/UnityExtensions/Unity/GUISystem/Standalone/UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.TestRunner">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.0a9/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.0a9/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.0a9/Editor/Data/UnityExtensions/Unity/TestRunner/portable/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>C:/Users/Yuga/Documents/GitHub/project_anima/Anima/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.dll</HintPath>
@@ -326,9 +320,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
       <HintPath>C:/Users/Yuga/Documents/GitHub/project_anima/Anima/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>C:/Users/Yuga/Documents/GitHub/project_anima/Anima/Library/PackageCache/com.unity.purchasing@2.0.6/UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.0a9/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
