@@ -1,5 +1,6 @@
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 === Thu Jan 10 11:16:19 2019
 
 Packages were changed.
@@ -13,6 +14,8 @@ The following packages were updated:
   com.unity.package-manager-ui from version 1.9.11 to 2.0.3
   com.unity.textmeshpro from version 1.2.4 to 1.3.0
 =======
+=======
+>>>>>>> e08e0f6d75c5fc61615e7c7c2033f0160ab29376
 === Wed Jan  9 19:21:43 2019
 
 Packages were changed.
@@ -55,4 +58,7 @@ The following packages were added:
   com.unity.modules.vr@1.0.0
   com.unity.modules.wind@1.0.0
   com.unity.modules.xr@1.0.0
+<<<<<<< HEAD
 >>>>>>> 04b5097f1dad2825340fa6be09e7314b2166c958
+=======
+>>>>>>> e08e0f6d75c5fc61615e7c7c2033f0160ab29376
