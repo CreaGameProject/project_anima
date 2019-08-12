@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour
         }
         else//パスが有効
         {
+            Debug.Log("パスが有効");
             navMeshAgent.SetDestination(dest);
         }
     }
