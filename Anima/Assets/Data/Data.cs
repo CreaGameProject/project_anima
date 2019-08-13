@@ -12,6 +12,7 @@ public class Data : MonoBehaviour
 
     public static Dictionary<string, Item> Items = new Dictionary<string, Item>();
     public Item[] items;
+
     public Weapon MainWeapon;
     public Weapon SubWeapon;
     public Mission selectedMission;

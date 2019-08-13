@@ -75,6 +75,7 @@ public class DataSave : MonoBehaviour
             Data.Instance.levels[i].missionOpen = new bool[Data.Instance.levels[i].missions.Length];
             LoadMethod("/Data/level" + (i + 1).ToString() + ".json", Data.Instance.levels[i]);
 
+
             for (int j = 0; j < Data.Instance.levels[i].missions.Length; j++)
             {
                 Data.Instance.levels[i].missions[j].Open = Data.Instance.levels[i].missionOpen[j];
