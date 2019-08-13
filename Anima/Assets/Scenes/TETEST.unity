@@ -105,21 +105,21 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 4
-    agentHeight: 16
+    agentRadius: 5
+    agentHeight: 15
     agentSlope: 45
-    agentClimb: 7.12
+    agentClimb: 6
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 1.3333334
+    cellSize: 1.6666666
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 0d1760d8a28f0174eb7ad4ccf3f9b787, type: 2}
 --- !u!1001 &346816234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -133,15 +133,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400080, guid: fa84ea56206d11349bb816511a1db016, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 50
+      value: 830
       objectReference: {fileID: 0}
     - target: {fileID: 400080, guid: fa84ea56206d11349bb816511a1db016, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.94
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 400080, guid: fa84ea56206d11349bb816511a1db016, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 50
+      value: 158
       objectReference: {fileID: 0}
     - target: {fileID: 400080, guid: fa84ea56206d11349bb816511a1db016, type: 3}
       propertyPath: m_LocalRotation.x
@@ -174,6 +174,18 @@ PrefabInstance:
     - target: {fileID: 400080, guid: fa84ea56206d11349bb816511a1db016, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400078, guid: fa84ea56206d11349bb816511a1db016, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 75.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400078, guid: fa84ea56206d11349bb816511a1db016, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 954.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400078, guid: fa84ea56206d11349bb816511a1db016, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa84ea56206d11349bb816511a1db016, type: 3}
@@ -446,7 +458,7 @@ GameObject:
   m_Name: Not
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!154 &1838146956
@@ -527,8 +539,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 4.8
-  m_Speed: 10
-  m_Acceleration: 8
+  m_Speed: 60
+  m_Acceleration: 30
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -551,4 +563,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73652d1d7d6ef347b4ce23065597e5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dest: {x: 317, y: 0, z: 580}
+  hungerSpeed: 0.01
+  satisfySpeed: 0.03
+  patrolPoints:
+  - satisfaction: 0.5
+    satisfyRatio: 0.7
+    center: {x: 183, y: 45, z: 712}
+    radius: 200
+    destination: {x: 183, y: 45, z: 700}
+  - satisfaction: 0.7
+    satisfyRatio: 0.7
+    center: {x: 830, y: 45, z: 158}
+    radius: 100
+    destination: {x: 830, y: 45, z: 158}
+  nowPatPointInd: 0
+  distance: 0
