@@ -61,11 +61,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float distance; //現在の巡回地点との距離
 
     private NavMeshAgent navMeshAgent;
+    private AnimationManager am;
 
     // Start is called before the first frame update
     void Start()
     {
         navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
+        am = GetComponent<AnimationManager>();
     }
     
     // Update is called once per frame
@@ -138,6 +140,7 @@ public class Enemy : MonoBehaviour
             //Debug.Log("パスが有効");
             navMeshAgent.SetDestination(destination);
         }
+        am.WalkAnimation(true);
         return true;
     }
 }
