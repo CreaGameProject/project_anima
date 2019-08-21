@@ -61,13 +61,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float distance; //現在の巡回地点との距離
 
     private NavMeshAgent navMeshAgent;
-    private AnimationManager am;
+//    private AnimationManager am;
 
     // Start is called before the first frame update
     void Start()
     {
         navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
-        am = GetComponent<AnimationManager>();
+//        am = GetComponent<AnimationManager>();
     }
     
     // Update is called once per frame
@@ -113,7 +113,16 @@ public class Enemy : MonoBehaviour
         judge.y = 0;
         distance = judge.magnitude;
         if(judge.magnitude < 30.0f){
-            pp.randomDestination(transform.position.y);
+            if(Random.Range(0.0f, 1.0f) > 0.7)
+            {
+//                am.WalkAnimation(true);
+                Debug.Log("移動");
+                pp.randomDestination(transform.position.y);
+            } else {
+//                am.WalkAnimation(false);
+                Debug.Log("止まる");
+                pp.destination = transform.position;
+            }
         }
         MoveToPoint(pp.destination);
     }
@@ -140,7 +149,6 @@ public class Enemy : MonoBehaviour
             //Debug.Log("パスが有効");
             navMeshAgent.SetDestination(destination);
         }
-        am.WalkAnimation(true);
         return true;
     }
 }

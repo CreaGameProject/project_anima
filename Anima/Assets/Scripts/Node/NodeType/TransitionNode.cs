@@ -23,7 +23,7 @@ public class TransitionNode : Node
 
     public override Node NodeRun()
     {
-        preyStatus.nodeManager.SetState(nextState);//優先度の考察が必要あり
+//        preyStatus.nodeManager.SetState(nextState);//優先度の考察が必要あり
         return this;
 
         throw new System.NotImplementedException();
