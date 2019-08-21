@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class SelectManager : MonoBehaviour
@@ -15,15 +16,9 @@ public class SelectManager : MonoBehaviour
 
     [SerializeField] private GameObject missions;
     [SerializeField] private GameObject levels;
-    private Data data;
 
     private byte pageNumber;
     private byte levelNumber;
-
-    private void Start()
-    {
-        data = GameObject.Find("GameManager").GetComponent<Data>();
-    }
 
     public void ToBase()
     {
@@ -60,17 +55,23 @@ public class SelectManager : MonoBehaviour
         {
             GameObject Mission = Instantiate(missionButton) as GameObject;
             Mission.transform.SetParent(content.transform);
-            Mission.GetComponent<MissionContent>().mission = data.levels[levelNumber].missions[i];
+            Mission.GetComponent<MissionContent>().mission = Data.Instance.levels[levelNumber].missions[i];
         }
     }
 
     public void ContentDisplay()
     {
         image.SetActive(true);
-        Mission mission = data.selectedMission;
+        Mission mission = Data.Instance.selectedMission;
+        string content="";
+        foreach(Prey_Number p in mission.Prey)
+        {
+            content = content + p.PreyName + p.number.ToString() + "頭 ";
+        }
         image.GetComponentInChildren<Text>().text
-            = "内容：" + mission.Content + Environment.NewLine
-            + "報酬：" + mission.Compensation + "$" + Environment.NewLine;
+            = "内容：" + content + "の狩猟"+ Environment.NewLine
+            + "報酬：" + mission.Compensation + "$" + Environment.NewLine
+            + "時間：" + mission.Limit + "分" + Environment.NewLine;
     }
 
     public void Page(string p)

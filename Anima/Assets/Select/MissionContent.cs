@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class MissionContent : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class MissionContent : MonoBehaviour
 
     private void Start()
     {
-        this.gameObject.GetComponent<UnityEngine.UI.Button>().interactable = mission.Open;
+        this.gameObject.GetComponent<Button>().interactable = mission.Open;
+        gameObject.GetComponentInChildren<Text>().text = mission.name;
     }
 }
