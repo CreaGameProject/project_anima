@@ -17,6 +17,6 @@ public class SaveManager : MonoBehaviour {
 
     public void ToBase()
     {
-        SceneMigration.Migrate(AnimaScene.Base);
+        SceneMigration.Migrate(AnimaScene.Save,AnimaScene.Base);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum AnimaScene {Title,Base,Save,Weapon,Fixture,Select,Mission,Compensation};
+public enum AnimaScene {Title,Table,Base,Save,Weapon,WeaponEnhance,WeaponSelect,Fixture,Select,Mission,Compensation};
 
 public class SceneMigration : MonoBehaviour
 {
@@ -10,8 +10,19 @@ public class SceneMigration : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public static void Migrate(AnimaScene to)
+    public static void Migrate(AnimaScene from,AnimaScene to)
     {
-        SceneManager.LoadSceneAsync((int)to, LoadSceneMode.Single);
+        SceneManager.UnloadSceneAsync((int)from);
+        SceneManager.LoadSceneAsync((int)to, LoadSceneMode.Additive);
+    }
+
+    public static void LoadTable()
+    {
+        SceneManager.LoadSceneAsync((int)AnimaScene.Table, LoadSceneMode.Additive);
+    }
+
+    public static void UnLoadTable()
+    {
+        SceneManager.UnloadSceneAsync((int)AnimaScene.Table);
     }
 }

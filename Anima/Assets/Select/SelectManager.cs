@@ -22,11 +22,12 @@ public class SelectManager : MonoBehaviour
 
     public void ToBase()
     {
-        SceneMigration.Migrate(AnimaScene.Base);
+        SceneMigration.Migrate(AnimaScene.Select,AnimaScene.Base);
     }
     public void ToMission()
     {
-        SceneMigration.Migrate(AnimaScene.Mission);
+        SceneMigration.Migrate(AnimaScene.Select, AnimaScene.Mission);
+        SceneMigration.UnLoadTable();
     }
 
     public void LevelSelect(string l)

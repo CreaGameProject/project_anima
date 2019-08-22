@@ -34,7 +34,7 @@ public class MissionManager : MonoBehaviour
 
     public void ToCompensation()
     {
-        SceneMigration.Migrate(AnimaScene.Compensation);
+        SceneMigration.Migrate(AnimaScene.Mission,AnimaScene.Compensation);
     }
 
 

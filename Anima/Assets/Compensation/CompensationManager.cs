@@ -35,7 +35,8 @@ public class CompensationManager : MonoBehaviour
 
     public void ToBase()
     {
-        SceneMigration.Migrate(AnimaScene.Base);
+        SceneMigration.LoadTable();
+        SceneMigration.Migrate(AnimaScene.Compensation,AnimaScene.Base);
     }
 
     public void Switch()

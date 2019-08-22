@@ -9,14 +9,23 @@ EditorBuildSettings:
     path: Assets/Title/Title.unity
     guid: b9873b894ad364c408ee1d2fbe567012
   - enabled: 1
+    path: Assets/Title/Table.unity
+    guid: d9745ae825f22814fa399cf38a5bcd97
+  - enabled: 1
     path: Assets/Base/Base.unity
     guid: 9f02112ecc09f314dbb380c19c775a54
   - enabled: 1
     path: Assets/Save/Save.unity
     guid: 46bef3b26c8cfa946b4cd85d58c857b0
   - enabled: 1
-    path: Assets/WeaponHome.unity
-    guid: 2fcf3d8df7e57eb499090a1e28af7173
+    path: Assets/Weapon/WeaponHome.unity
+    guid: 6580eafd3781fb148ab19d787c28e85a
+  - enabled: 1
+    path: Assets/Weapon/WeaponEnhance.unity
+    guid: 5f9bfa35c2b72f243b30ded2c990394a
+  - enabled: 1
+    path: Assets/Weapon/WeaponSelect.unity
+    guid: a9accf1eb1e9d5b47af2a5e01b40f1ba
   - enabled: 1
     path: Assets/FixtureHome.unity
     guid: fddb8af7c669cff4d80dc424523e0ca4
