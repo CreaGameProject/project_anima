@@ -12,15 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8944e3fe9aef47643b0f600c17241474, type: 3}
   m_Name: ShotgunC
   m_EditorClassIdentifier: 
-  weaponName: shotgunC
-  kind: 1
   model: {fileID: 0}
   icon: {fileID: 0}
-  possession: 0
-  speed: 600
-  power: 150
+  level: 0
+  speed:
+  - 600
+  power:
+  - 150
+  - 50
+  distance:
+  - 35
+  reload:
+  - 4
   attenuation: 25
-  distance: 40
-  reload: 4
-  strage: 3
-  retention: 18
+  strage: 0300000001000000
+  retention: 1200000006000000

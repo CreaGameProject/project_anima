@@ -7,10 +7,19 @@ public class DataSave : MonoBehaviour
 {
     public static void WeaponSave()
     {
-        foreach (Weapon weapon in Data.Instance.weapons)
+        WeaponData weaponData = new WeaponData();
+        weaponData.rifleLevel = new int[Data.Instance.rifles.Length];
+        weaponData.shotgunLevel = new int[Data.Instance.shotguns.Length];
+
+        for(int i = 0; i < weaponData.rifleLevel.Length; i++)
         {
-            SaveMethod("/Data/Weapons/" + weapon.name + ".json", weapon);
+            weaponData.rifleLevel[i] = Data.Instance.rifles[i].Level;
         }
+        for (int i = 0; i < weaponData.shotgunLevel.Length; i++)
+        {
+            weaponData.rifleLevel[i] = Data.Instance.shotguns[i].Level;
+        }
+        SaveMethod("/Data/weapon.json", weaponData);
     }
 
     public static void FixtureSave()
@@ -46,9 +55,16 @@ public class DataSave : MonoBehaviour
 
     public static void WeaponLoad()
     {
-        foreach (Weapon weapon in Data.Instance.weapons)
+        WeaponData weaponData = new WeaponData();
+        LoadMethod("/Data/weapon.json", weaponData);
+
+        for(int i = 0; i < weaponData.rifleLevel.Length; i++)
         {
-            LoadMethod("/Data/Weapons/" + weapon.name + ".json", weapon);
+            Data.Instance.rifles[i].Level = weaponData.rifleLevel[i];
+        }
+        for (int i = 0; i < weaponData.shotgunLevel.Length; i++)
+        {
+            Data.Instance.shotguns[i].Level = weaponData.shotgunLevel[i];
         }
     }
 
@@ -100,6 +116,7 @@ public class DataSave : MonoBehaviour
         var reader = new StreamReader(info.OpenRead());
         var json = reader.ReadToEnd();
         JsonUtility.FromJsonOverwrite(json, data);
+        reader.Close();
     }
 }
 
@@ -108,4 +125,11 @@ public class FixtureData
 {
     public int[] itemNumbers;
     public int[] materialNumbers;
+}
+
+[Serializable]
+public class WeaponData
+{
+    public int[] rifleLevel;
+    public int[] shotgunLevel;
 }

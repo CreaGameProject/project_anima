@@ -25,6 +25,7 @@ public class CompensationManager : MonoBehaviour
 
     private void Start()
     {
+        SceneMigration.LoadTable();
         materialParent = GameObject.Find("materials").transform;
         for(int i = 0; i < 20; i++)
         {
@@ -35,7 +36,6 @@ public class CompensationManager : MonoBehaviour
 
     public void ToBase()
     {
-        SceneMigration.LoadTable();
         SceneMigration.Migrate(AnimaScene.Compensation,AnimaScene.Base);
     }
 

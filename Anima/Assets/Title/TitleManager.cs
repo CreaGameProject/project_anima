@@ -1,7 +1,12 @@
 ﻿using UnityEngine;
 
 public class TitleManager: MonoBehaviour {
-    
+
+    private void Awake()
+    {
+        SceneMigration.LoadTable();
+    }
+
     public void ToBase()
     {
         DataSave.WeaponLoad();

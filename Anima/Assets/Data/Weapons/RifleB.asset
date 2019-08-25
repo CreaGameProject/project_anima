@@ -12,15 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8944e3fe9aef47643b0f600c17241474, type: 3}
   m_Name: RifleB
   m_EditorClassIdentifier: 
-  weaponName: RifleB
-  kind: 0
   model: {fileID: 0}
   icon: {fileID: 0}
-  possession: 0
-  speed: 700
-  power: 200
+  level: 1
+  speed:
+  - 700
+  power:
+  - 200
+  - 100
+  distance:
+  - 80
+  - 20
+  reload:
+  - 9
+  - -0.5
   attenuation: 5
-  distance: 80
-  reload: 9
-  strage: 3
-  retention: 18
+  strage: 03000000
+  retention: 12000000

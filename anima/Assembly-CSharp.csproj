@@ -85,7 +85,10 @@
     <Compile Include="Assets\Select\MissionContent.cs" />
     <Compile Include="Assets\Select\SelectManager.cs" />
     <Compile Include="Assets\Title\TitleManager.cs" />
+    <Compile Include="Assets\Weapon\Enhance.cs" />
     <Compile Include="Assets\Weapon\WeaponHome.cs" />
+    <Compile Include="Assets\Weapon\WeaponSelect.cs" />
+    <None Include="Assets\README.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Yuga/Documents/GitHub/project_anima/Anima/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

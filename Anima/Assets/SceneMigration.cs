@@ -10,15 +10,24 @@ public class SceneMigration : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+
+    public static void MigrateSingle(AnimaScene to)
+    {
+        SceneManager.LoadSceneAsync((int)to, LoadSceneMode.Single);
+    }
+
     public static void Migrate(AnimaScene from,AnimaScene to)
     {
-        SceneManager.UnloadSceneAsync((int)from);
         SceneManager.LoadSceneAsync((int)to, LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync((int)from);
     }
 
     public static void LoadTable()
     {
-        SceneManager.LoadSceneAsync((int)AnimaScene.Table, LoadSceneMode.Additive);
+        if (SceneManager.GetSceneByBuildIndex((int)AnimaScene.Table).isLoaded == false)
+        {
+            SceneManager.LoadSceneAsync((int)AnimaScene.Table, LoadSceneMode.Additive);
+        }
     }
 
     public static void UnLoadTable()

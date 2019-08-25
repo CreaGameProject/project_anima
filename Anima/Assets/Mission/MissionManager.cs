@@ -16,9 +16,20 @@ public class MissionManager : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(FadeOut(GameObject.Find("fade").GetComponent<Image>()));
         MainIcon = Data.Instance.MainWeapon.Icon;
-        SubIcon = Data.Instance.SubWeapon.Icon;
+        //SubIcon = Data.Instance.SubWeapon.Icon;
         start = DateTime.Now;
+    }
+
+    IEnumerator FadeOut(Image fade)
+    {
+        for(float i = 0; i < 60; i++)
+        {
+            yield return null;
+            fade.color = Color.Lerp(Color.black, Color.clear, i / 60f);
+        }
+        Destroy(fade.gameObject);
     }
 
     private void Update()
@@ -27,14 +38,13 @@ public class MissionManager : MonoBehaviour
         if (ts.Minutes > 50f)
         {
             start = DateTime.Now;
-            StartCoroutine("EndMission");
         }
     }
 
 
     public void ToCompensation()
     {
-        SceneMigration.Migrate(AnimaScene.Mission,AnimaScene.Compensation);
+        SceneMigration.MigrateSingle(AnimaScene.Compensation);
     }
 
 
@@ -50,7 +60,7 @@ public class MissionManager : MonoBehaviour
         clear.GetComponentInChildren<Text>().text = "あと30秒で帰還します。";
         yield return new WaitForSeconds(5f);
         clear.SetActive(false);
-        yield return new WaitForSeconds(25f);
+        yield return new WaitForSeconds(5f);
         ToCompensation();
     }
 }

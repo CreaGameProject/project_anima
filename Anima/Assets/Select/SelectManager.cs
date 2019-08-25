@@ -26,8 +26,7 @@ public class SelectManager : MonoBehaviour
     }
     public void ToMission()
     {
-        SceneMigration.Migrate(AnimaScene.Select, AnimaScene.Mission);
-        SceneMigration.UnLoadTable();
+        SceneMigration.MigrateSingle(AnimaScene.Mission);
     }
 
     public void LevelSelect(string l)

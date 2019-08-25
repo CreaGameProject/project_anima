@@ -12,15 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8944e3fe9aef47643b0f600c17241474, type: 3}
   m_Name: ShotgunA
   m_EditorClassIdentifier: 
-  weaponName: ShotgunA
-  kind: 1
   model: {fileID: 0}
   icon: {fileID: 0}
-  possession: 1
-  speed: 500
-  power: 100
+  level: 0
+  speed:
+  - 500
+  power:
+  - 100
+  - 50
+  distance:
+  - 30
+  - 5
+  reload:
+  - 2
   attenuation: 60
-  distance: 30
-  reload: 3
-  strage: 2
-  retention: 12
+  strage: 02000000
+  retention: 0c000000
