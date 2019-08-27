@@ -4,10 +4,8 @@ using UnityEngine.UI;
 public class CompensationManager : MonoBehaviour
 {
     [SerializeField] private GameObject monitor1;
-
     [SerializeField] private GameObject monitor2;
-    [SerializeField] private GameObject buttonPrefab;
-    private Transform materialParent;
+    [SerializeField] private Text compensationValue;
 
     public GameObject selecting;
     public static CompensationManager Instance;
@@ -26,22 +24,27 @@ public class CompensationManager : MonoBehaviour
     private void Start()
     {
         SceneMigration.LoadTable();
-        materialParent = GameObject.Find("materials").transform;
-        for(int i = 0; i < 20; i++)
+        foreach(Button button in GameObject.Find("materials").GetComponentsInChildren<Button>())
         {
-            GameObject materialIcon = Instantiate(buttonPrefab, materialParent);
+            button.onClick.AddListener(() => {
+                selecting = button.gameObject;
+            });
         }
-        selecting = GameObject.Find("Button(Clone)");
     }
 
     public void ToBase()
     {
-        SceneMigration.Migrate(AnimaScene.Compensation,AnimaScene.Base);
+        SceneMigration.MigrateReplacement(AnimaScene.Compensation,AnimaScene.Save);
     }
 
     public void Switch()
     {
         monitor1.SetActive(false);
+        compensationValue.text =
+            Data.Instance.selectedMission.Compensation.ToString() + "$" + System.Environment.NewLine +
+            Data.Instance.materials[0].Number.ToString() + "$" + System.Environment.NewLine +
+            System.Environment.NewLine +
+            (Data.Instance.materials[0].Number += Data.Instance.selectedMission.Compensation).ToString() + "$";
         monitor2.SetActive(true);
     }
 }

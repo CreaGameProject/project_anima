@@ -22,7 +22,7 @@ public class SelectManager : MonoBehaviour
 
     public void ToBase()
     {
-        SceneMigration.Migrate(AnimaScene.Select,AnimaScene.Base);
+        GameObject.Find("TableCamera").GetComponent<CameraAngle>().Select_to_Base();
     }
     public void ToMission()
     {

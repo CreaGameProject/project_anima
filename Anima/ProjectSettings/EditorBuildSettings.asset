@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Title/Title.unity
     guid: b9873b894ad364c408ee1d2fbe567012
   - enabled: 1
-    path: Assets/Title/Table.unity
+    path: Assets/Table.unity
     guid: d9745ae825f22814fa399cf38a5bcd97
   - enabled: 1
     path: Assets/Base/Base.unity

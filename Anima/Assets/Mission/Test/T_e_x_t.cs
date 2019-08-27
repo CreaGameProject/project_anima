@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class T_e_x_t: MonoBehaviour
 {
-    [SerializeField]
-    private Transform targetTfm;
+    public Transform targetTfm;
 
     private RectTransform myRectTfm;
     private Vector3 offset = new Vector3(0, 1.5f, 0);

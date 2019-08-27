@@ -16,7 +16,7 @@ public class SceneMigration : MonoBehaviour
         SceneManager.LoadSceneAsync((int)to, LoadSceneMode.Single);
     }
 
-    public static void Migrate(AnimaScene from,AnimaScene to)
+    public static void MigrateReplacement(AnimaScene from,AnimaScene to)
     {
         SceneManager.LoadSceneAsync((int)to, LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync((int)from);

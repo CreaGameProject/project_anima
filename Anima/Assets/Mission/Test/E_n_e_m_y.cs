@@ -2,7 +2,7 @@
 
 public class E_n_e_m_y : MonoBehaviour
 {
-    private byte state;
+    public byte state;
     private Vector3 beforePos;
     private Vector3 newPos;
     private Vector3 direction;
@@ -48,7 +48,7 @@ public class E_n_e_m_y : MonoBehaviour
         }
     }
 
-    //クリアした瞬間
+    //死亡
     private void OnCollisionEnter(Collision collision)
     {
         GetComponent<MeshRenderer>().materials[0].color = Color.red;

@@ -6,28 +6,28 @@ public class BaseManager : MonoBehaviour
 {
     public void ToTitle()
     {
-        SceneMigration.Migrate(AnimaScene.Base,AnimaScene.Title);
+        SceneMigration.MigrateReplacement(AnimaScene.Base,AnimaScene.Title);
         Destroy(GameObject.Find("GameManager"));
     }
 
     public void ToSave()
     {
-        SceneMigration.Migrate(AnimaScene.Base, AnimaScene.Save);
+        SceneMigration.MigrateReplacement(AnimaScene.Base, AnimaScene.Save);
     }
 
     public void ToWeapon()
     {
-        StartCoroutine(GameObject.Find("TableCamera").GetComponent<CameraAngle>().Base_to_Weapon());
+        GameObject.Find("TableCamera").GetComponent<CameraAngle>().Base_to_Weapon();
     }
 
 
     public void ToFixture()
     {
-        SceneMigration.Migrate(AnimaScene.Base, AnimaScene.Fixture);
+        GameObject.Find("TableCamera").GetComponent<CameraAngle>().Base_to_Fixture();
     }
 
     public void ToMission()
     {
-        SceneMigration.Migrate(AnimaScene.Base, AnimaScene.Select);
+        GameObject.Find("TableCamera").GetComponent<CameraAngle>().Base_to_Select();
     }
 }

@@ -51,6 +51,6 @@ public class Mission : ScriptableObject
 
     //クリア済
     [SerializeField] private bool clear;
-    public bool Clear { get { return clear; } set { clear = value; } }
+    public bool Clear { get { return clear; } set { clear = clear || value; } }
 }
 

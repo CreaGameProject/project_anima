@@ -9,6 +9,10 @@ public class MissionManager : MonoBehaviour
     [SerializeField] private RawImage MainIcon;
     [SerializeField] private RawImage SubIcon;
     [SerializeField] private GameObject clear;
+    [SerializeField] private Text weaponName;
+
+    [SerializeField] private GameObject _enemy;
+    [SerializeField] private GameObject _enemyText;
 
     //制限時間管理(タキサイキアに影響されない)
     private DateTime start;
@@ -17,9 +21,21 @@ public class MissionManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(FadeOut(GameObject.Find("fade").GetComponent<Image>()));
-        MainIcon = Data.Instance.MainWeapon.Icon;
-        //SubIcon = Data.Instance.SubWeapon.Icon;
+        //MainIcon = Data.Instance.MainWeapon.Icon;
+        ////SubIcon = Data.Instance.SubWeapon.Icon;
         start = DateTime.Now;
+        foreach(Prey_Number prey_ in Data.Instance.selectedMission.Prey)
+        {
+            for(int i = 0; i < prey_.number; i++)
+            {
+                GameObject enemy = Instantiate(_enemy);
+                GameObject enemyText = Instantiate(_enemyText);
+                enemyText.transform.SetParent(GameObject.Find("Canvas").transform);
+                enemyText.GetComponent<Text>().text = prey_.PreyName;
+                enemyText.GetComponent<T_e_x_t>().targetTfm = enemy.transform;
+            }
+        }
+        weaponName.text = Data.Instance.MainWeapon.name;
     }
 
     IEnumerator FadeOut(Image fade)
@@ -50,7 +66,15 @@ public class MissionManager : MonoBehaviour
 
     public void MissionClear()
     {
-        StartCoroutine("ClearCoroutine");
+        bool c = true;
+        foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            c &= (e.GetComponent<E_n_e_m_y>().state == 2);
+        }
+        if (c)
+        {
+            StartCoroutine("ClearCoroutine");
+        }
     }
 
     private IEnumerator ClearCoroutine()

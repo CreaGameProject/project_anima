@@ -12,7 +12,7 @@ public class TitleManager: MonoBehaviour {
         DataSave.WeaponLoad();
         DataSave.FixtureLoad();
         DataSave.MissionLoad();
-        SceneMigration.Migrate(AnimaScene.Title,AnimaScene.Base);
+        SceneMigration.MigrateReplacement(AnimaScene.Title,AnimaScene.Base);
     }
 
     public void Quit()
