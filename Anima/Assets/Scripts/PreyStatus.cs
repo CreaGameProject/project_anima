@@ -7,13 +7,10 @@ public enum State
     DEATH, EXPLORING, VIGILANCE, SEARCH, DISCOVERED
 }
 
-public abstract class PreyStatus : MonoBehaviour
+public class PreyStatus : MonoBehaviour
 {
-    /*memo
-     *各ノードがどのように座標などのデータを取ってくるか... 
-     */
 
-    // public int hp;//HP
+    public int hp;//HP
     // [SerializeField]protected int hpMax;//最大HP
     // public float vital;//スタミナ
     // public float vigilance;//警戒値
@@ -36,32 +33,5 @@ public abstract class PreyStatus : MonoBehaviour
     //     LibrariesInitialize();
     //     StatusInitialize();
     //     NodeManagerSetup();
-    // }
-
-    // #region Start関数内で実行される初期化用関数
-    // protected abstract void LibrariesInitialize();//NodeLibrariesフォルダの各ノードライブラリをnodeLibrariesに格納
-
-    // protected virtual void StatusInitialize()//ステータス初期化
-    // {
-    //     hp = hpMax;
-    //     vital = 1;
-    //     vigilance = 0;
-    //     foreach(string i in parts.Keys)//各部位の体力全快
-    //     {
-    //         parts[i] = 1;
-    //     }
-    // }
-
-    // private void NodeManagerSetup()//ビヘイビアツリー(NodeManager)を開始するための関数
-    // {
-    //     nodeManager = new NodeManager(nodeLibraries);//nodeManagerインスタンスを宣言、コンストラクタからノードライブラリを登録
-    //     nodeManager.SetState(State.EXPLORING);//ステートの変更、ルートノードより開始。
-    // }
-    // #endregion
-
-    // // Update is called once per frame
-    // void Update()
-    // {
-
     // }
 }

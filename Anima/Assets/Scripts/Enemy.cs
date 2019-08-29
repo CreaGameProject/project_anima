@@ -128,27 +128,15 @@ public class Enemy : MonoBehaviour
     }
 
     //NavMeshを利用した移動 パスが存在すればtrue
-    public bool MoveToPoint(Vector3 destination){
+    protected IEnumerator MoveToPoint(Vector3 destination){
         if(navMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid)//パスが無効
         {
             Debug.Log("パスが無効");
-            NavMeshHit hit = new NavMeshHit();
-            if (NavMesh.SamplePosition(transform.position, out hit, 10.0f, NavMesh.AllAreas))//hit.positionに最も近いメッシュ上の座標を取得
-            {
-                Debug.Log("パスを発見");
-                navMeshAgent.SetDestination(hit.position);
-            }
-            else
-            {
-                Debug.Log("navmeshが見つかりません");
-                return false;
-            }
+            yield break;
         }
         else//パスが有効
         {
-            //Debug.Log("パスが有効");
             navMeshAgent.SetDestination(destination);
         }
-        return true;
     }
 }
