@@ -33,8 +33,14 @@ public class DecisionMaker: MonoBehaviour
         
     }
 
+    protected IEnumerator RootState()
+    {
+        yield break;
+    }
+    
     protected IEnumerator Patrol(Func<IEnumerator> FindFunc)
     {
+        // プレイヤー認識, あるいは発見した場合は巡回コルーチンを停止、強制ステート遷移する。
         while (true)
         {
             yield return _patrolState.PatrolStart();

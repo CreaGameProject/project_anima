@@ -11,40 +11,54 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class PatrolState : MonoBehaviour
 {
-    
-    [SerializeField] private float probabilityOfMove = 0.6f; //巡回中移動を選択する確率
-    
-    
+    // コンポーネント格納用
     private Animator _animator;
     private NavMeshAgent _navMeshAgent;
     
+    // Animator用のハッシュ
+    private static readonly int Walking = Animator.StringToHash("Walking");
+    
+    // DecisionMakerから借りてくる関数
     /// <summary> 特定の座標まで移動 </summary>
     /// <param name="reachDistance"> destinationまでたどり着いたと判定してもよい距離 </param>
     public delegate IEnumerator MoveToPoint(Vector3 destination, float reachDistance);
     public MoveToPoint moveToPoint;
 
     // parameters
-    [SerializeField] private float hungerSpeed; //腹が減る速度
-    [SerializeField] private float satisfySpeed; //腹が満たされる速度
-    [SerializeField] private List<PatrolPoint> patrolPoints = new List<PatrolPoint>(); //敵が持つ巡回地点のリスト
-    [SerializeField] private int nowPatPointInd; //現在の巡回地点
-    [SerializeField] private float distance; //現在の巡回地点との距離
+    /// <summary> 巡回中移動を選択する確率 </summary>
+    [SerializeField] private float probabilityOfMove = 0.6f;
+    /// <summary> 満腹度減少速度 </summary>
+    [SerializeField] private float hungerSpeed;
+    /// <summary> 満腹度回復速度 </summary>
+    [SerializeField] private float satisfySpeed;
+    /// <summary> 穢物がもつ巡回地点のリスト </summary>
+    [SerializeField] private List<PatrolPoint> patrolPoints = new List<PatrolPoint>();
+    /// <summary> MoveToPointの引数用 どこまで目標座標まで近づけばたどり着いたとするか </summary>
+    [SerializeField] private float reachedDistance;
+    /// <summary> 巡回中待機が選択されたとき待つ時間 </summary>
+    [SerializeField] private float waitTime;
+    
+    /// <summary> 現在の巡回地点 </summary>
+    private PatrolPoint nowPatrol;
 
-    public bool endPatrol { get; private set; } = true;
-
+    /// <summary> 一つの巡回地点を表現するクラス </summary>
     [System.Serializable]
-    public class PatrolPoint{//巡回地点のクラス
-        [SerializeField] public float satisfaction = 1; //満足度 満腹度ともいう
-        [SerializeField] private float satisfyThreshold = 0.7f; //satisfactionがこれを超えるとほかの地点に移動できるようになる。
-        [SerializeField] private Vector3 center;//中心
-        [SerializeField] private float radius;//半径 必ず移動可能な範囲で設定すること
-        [SerializeField] public Vector3 destination;　//現在の目標地点
+    public class PatrolPoint{
+        /// <summary> 満足度 満腹度ともいう </summary>
+        [SerializeField] public float satisfaction = 1;
+        /// <summary> satisfactionがこれを超えるとほかの地点に移動できるようになる。 </summary>
+        [SerializeField] private float satisfyThreshold = 0.7f;
+        /// <summary> PatrolPointの中心座標 </summary>
+        [SerializeField] private Vector3 center;
+        /// <summary> 半径 必ず移動可能な範囲で設定すること(壁の中とか含んだらだめ) </summary>
+        [SerializeField] private float radius;
+        /// <summary> 現在の移動先座標 </summary>
+        [SerializeField] public Vector3 destination;
 
         /// <summary> ある座標が巡回地点範囲内にあればtrue </summary>
-        public bool OnPoint(Vector3 position){
-            Vector3 judge = position - center;
-            judge.y = 0;
-            return judge.magnitude < radius;
+        public bool OnPoint(Vector3 position)
+        {
+            return DecisionMaker.XZDistance(position, center) < radius;
         }
         
         /// <summary> 目的地のランダマイズ </summary>
@@ -66,76 +80,80 @@ public class PatrolState : MonoBehaviour
         public void Hunger(float hungry){
             satisfaction = Mathf.Clamp(satisfaction - hungry, 0, 1);
         }
-        
-        
     }
     
-    //
-
+    /// <summary> PatrolStateの本体 </summary>
     public IEnumerator PatrolStart()
     {
         while (true)
         {
-            
+            if (Random.Range(0f, 1f) < probabilityOfMove)
+            {
+                yield return PatrolMove();
+            }
+            else
+            {
+                yield return PatrolWait();
+            }
         }
-        if (Random.Range(0f, 1f) < probabilityOfMove)
-        {
-            
-        }
-        else
-        {
-            
-        }
+    }
+
+    /// <summary> PatrolPointを選択し、移動先を算出、移動する </summary>
+    private IEnumerator PatrolMove()
+    {
+        nowPatrol = SatisfySelector();
+        _animator.SetBool(Walking, true);
+        yield return moveToPoint(nowPatrol.destination, reachedDistance);
+        _animator.SetBool(Walking, false);
+        yield break;
+    }
+
+    /// <summary> PatrolPointへの移動を一回休み </summary>
+    private IEnumerator PatrolWait()
+    {
+        yield return new WaitForSeconds(waitTime);
+        yield break;
     }
     
-    //巡回地点を選択する
-    public void SatiisfySelector(){
-        //腹減り処理 & 最小満足度の巡回地点を選択
-        float deltime = Time.deltaTime;
-        float min = 1;
-        int indexOfMinSatisfaction = 0;
-        for(int i = 0; i < patrolPoints.Count; i++){
-            patrolPoints[i].Hunger(deltime * hungerSpeed);
-            if(patrolPoints[i].satisfaction < min){
-                indexOfMinSatisfaction = i;
-            }
+    /// <summary> 最小満腹度の巡回地点を選択、具体的な移動先決定 </summary>
+    /// <returns>選択されたPatrolPoint(移動先座標ランダマイズ済み</returns>
+    private PatrolPoint SatisfySelector(){
+        // ほかの巡回地点に遷移不可能なら移動先を再抽選
+        if (nowPatrol.CanTransition() == false)
+        {
+            nowPatrol.RandomDestination();
+            return nowPatrol;
         }
-        //現在の巡回地点が十分満たされている(遷移可能)なら巡回地点を選びなおし
-        if(patrolPoints[nowPatPointInd].CanTransition()){
-            //現在の地点が
-            if(nowPatPointInd != indexOfMinSatisfaction){
-                patrolPoints[indexOfMinSatisfaction].RandomDestination();
-            }
-            nowPatPointInd = indexOfMinSatisfaction;
-        }
-
-        //ある巡回地点における具体的な移動座標の算出&移動
-        SatisfyBehave(patrolPoints[nowPatPointInd]);
         
-        //満腹度回復処理
-        if(patrolPoints[nowPatPointInd].OnPoint(transform.position)){
-            patrolPoints[nowPatPointInd].Hunger(-satisfySpeed*deltime);
+        // ほかの巡回地点に遷移可能ならPatrolPointを再選択
+        PatrolPoint pointOfMinSatisfaction = patrolPoints[0];
+        for(int i = 1; i < patrolPoints.Count; i++){
+            if(patrolPoints[i].satisfaction < pointOfMinSatisfaction.satisfaction)
+            {
+                pointOfMinSatisfaction = patrolPoints[i];
+            }
         }
+        
+        // 具体的な移動先をランダマイズで決定
+        pointOfMinSatisfaction.RandomDestination();
+        return pointOfMinSatisfaction;
     }
 
-    //ある巡回地点における具体的な移動座標の算出&移動
-    public void SatisfyBehave(PatrolPoint pp){
-        Vector3 judge = pp.destination - transform.position;
-        judge.y = 0;
-        distance = judge.magnitude;
-        if(judge.magnitude < 30.0f){
-            if(Random.Range(0.0f, 1.0f) > 0.7)
-            {
-//                am.WalkAnimation(true);
-                Debug.Log("移動");
-                pp.RandomDestination();
-            } else {
-//                am.WalkAnimation(false);
-                Debug.Log("止まる");
-                pp.destination = transform.position;
-            }
+    /// <summary> 満腹度の回復、消費　引数のPatrolPoint領域内であれば回復する </summary>
+    /// <param name="pp">現在の移動目標のPatrolPoint</param>
+    private void Satisfy(PatrolPoint pp){
+        // 消費
+        float deltaTime = Time.deltaTime;
+        foreach (var patrolPoint in patrolPoints)
+        {
+            patrolPoint.Hunger(deltaTime * hungerSpeed);
         }
-        //moveToPoint(pp.destination, distance);
+        
+        // 回復
+        if (pp.OnPoint(transform.position))
+        {
+            pp.Hunger(-satisfySpeed*deltaTime);
+        }
     }
     
     
@@ -148,6 +166,6 @@ public class PatrolState : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Satisfy(nowPatrol);
     }
 }
