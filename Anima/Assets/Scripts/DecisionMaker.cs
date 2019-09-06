@@ -15,6 +15,7 @@ public class DecisionMaker: MonoBehaviour
     private NavMeshAgent _navMeshAgent;
     private PreyStatus _preyStatus;
     private PatrolState _patrolState;
+    private Perception _perception;
     
     // Start is called before the first frame update
     private void Start()
@@ -23,6 +24,7 @@ public class DecisionMaker: MonoBehaviour
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _preyStatus = GetComponent<PreyStatus>();
         _patrolState = GetComponent<PatrolState>();
+        _perception = GetComponent<Perception>();
         
         _patrolState.moveToPoint = MoveToPoint;
     }
@@ -33,23 +35,36 @@ public class DecisionMaker: MonoBehaviour
         
     }
 
-    protected IEnumerator RootState()
-    {
-        yield break;
-    }
-    
-    protected IEnumerator Patrol(Func<IEnumerator> FindFunc)
+    protected IEnumerator RootState(Func<IEnumerator> findState)
     {
         // プレイヤー認識, あるいは発見した場合は巡回コルーチンを停止、強制ステート遷移する。
         while (true)
         {
-            yield return _patrolState.PatrolStart();
-            yield return null;
-            FindFunc();
+            Coroutine patrol = StartCoroutine(_patrolState.PatrolStart());
+            if (_preyStatus.hp <= 0)
+            {
+                StopCoroutine(patrol);
+                yield return DeathState();
+            }
+            else if (_perception.perceptionLevel >= PerceptionLevel.Recognition)
+            {
+                StopCoroutine(patrol);
+                yield return findState;
+            }
+
             yield return null;
         }
     }
-    
+
+    protected IEnumerator DeathState()
+    {
+        //アニメーションの割り込み等
+        while (true)
+        {
+            
+        }
+    }
+
     /// <summary> 特定の座標まで移動 </summary>
     /// <param name="reachDistance"> destinationまでたどり着いたと判定してもよい距離 </param>
     public IEnumerator MoveToPoint(Vector3 destination, float reachDistance){
