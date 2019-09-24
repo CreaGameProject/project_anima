@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Deer : DecisionMaker
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override IEnumerator FindState()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        while (true)
+        {
+            yield return null;
+        }
     }
 }

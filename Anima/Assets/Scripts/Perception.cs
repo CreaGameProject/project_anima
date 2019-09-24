@@ -15,7 +15,7 @@ public class Perception : MonoBehaviour
     
     public delegate IEnumerator PerceptionEvent(Vector3 position);
 
-    public PerceptionLevel perceptionLevel;
+    public PerceptionLevel perceptionLevel = PerceptionLevel.Undiscovered;
     
     // Start is called before the first frame update
     void Start()

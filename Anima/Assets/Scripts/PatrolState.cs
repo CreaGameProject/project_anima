@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -35,6 +36,8 @@ public class PatrolState : MonoBehaviour
     [SerializeField] private List<PatrolPoint> patrolPoints = new List<PatrolPoint>();
     /// <summary> MoveToPointの引数用 どこまで目標座標まで近づけばたどり着いたとするか </summary>
     [SerializeField] private float reachedDistance;
+    /// <summary> 歩く速さ </summary>
+    [SerializeField] private float walkSpeed;
     /// <summary> 巡回中待機が選択されたとき待つ時間 </summary>
     [SerializeField] private float waitTime;
     
@@ -85,14 +88,17 @@ public class PatrolState : MonoBehaviour
     /// <summary> PatrolStateの本体 </summary>
     public IEnumerator PatrolStart()
     {
+        _navMeshAgent.speed = walkSpeed;
         while (true)
         {
             if (Random.Range(0f, 1f) < probabilityOfMove)
             {
+                Debug.Log("Prey Move!!");
                 yield return PatrolMove();
             }
             else
             {
+                Debug.Log("Prey Wait!!");
                 yield return PatrolWait();
             }
         }
@@ -119,10 +125,13 @@ public class PatrolState : MonoBehaviour
     /// <returns>選択されたPatrolPoint(移動先座標ランダマイズ済み</returns>
     private PatrolPoint SatisfySelector(){
         // ほかの巡回地点に遷移不可能なら移動先を再抽選
-        if (nowPatrol.CanTransition() == false)
+        if (nowPatrol != null)// null check
         {
-            nowPatrol.RandomDestination();
-            return nowPatrol;
+            if (nowPatrol.CanTransition() == false)
+            {
+                nowPatrol.RandomDestination();
+                return nowPatrol;
+            }
         }
         
         // ほかの巡回地点に遷移可能ならPatrolPointを再選択
@@ -150,17 +159,21 @@ public class PatrolState : MonoBehaviour
         }
         
         // 回復
-        if (pp.OnPoint(transform.position))
+        if (pp != null)
         {
-            pp.Hunger(-satisfySpeed*deltaTime);
+            if (pp.OnPoint(transform.position))
+            {
+                pp.Hunger(-satisfySpeed*deltaTime);
+            }
         }
     }
     
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        _animator = GetComponent<Animator>();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame

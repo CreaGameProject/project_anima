@@ -8,7 +8,7 @@ using UnityEngine.AI;
 /// <summary>
 /// 意思決定の土台
 /// </summary>
-public class DecisionMaker: MonoBehaviour
+public abstract class DecisionMaker: MonoBehaviour
 {
 
     private Animator _animator;
@@ -27,41 +27,41 @@ public class DecisionMaker: MonoBehaviour
         _perception = GetComponent<Perception>();
         
         _patrolState.moveToPoint = MoveToPoint;
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
         
+        // fortest
+        StartCoroutine(RootState());
     }
 
-    protected IEnumerator RootState(Func<IEnumerator> findState)
+    protected IEnumerator RootState()
     {
         // プレイヤー認識, あるいは発見した場合は巡回コルーチンを停止、強制ステート遷移する。
         while (true)
         {
             Coroutine patrol = StartCoroutine(_patrolState.PatrolStart());
-            if (_preyStatus.hp <= 0)
+            while (true)
             {
-                StopCoroutine(patrol);
-                yield return DeathState();
+                if (_preyStatus.hp <= 0)
+                {
+                    StopCoroutine(patrol);
+                    yield return DeathState();
+                }
+                else if (_perception.perceptionLevel >= PerceptionLevel.Recognition)
+                {
+                    StopCoroutine(patrol);
+                    yield return FindState();
+                }
             }
-            else if (_perception.perceptionLevel >= PerceptionLevel.Recognition)
-            {
-                StopCoroutine(patrol);
-                yield return findState;
-            }
-
-            yield return null;
         }
     }
+
+    protected abstract IEnumerator FindState();
 
     protected IEnumerator DeathState()
     {
         //アニメーションの割り込み等
         while (true)
         {
-            
+            yield return null;
         }
     }
 
