@@ -5,13 +5,35 @@ using System;
 [Serializable]
 public class DataSave : MonoBehaviour
 {
+    //天才か？このクラス
+    [Serializable]
+    private class WeaponData
+    {
+        public int[] rifleLevel;
+        public int[] shotgunLevel;
+    }
+
+    [Serializable]
+    private class FixtureData
+    {
+        public int[] itemNumbers;
+        public int[] ingredientNumbers;
+    }
+
+    [Serializable]
+    private class LevelData
+    {
+        public bool levelOpen;
+        public bool[] missionOpen;
+    }
+
     public static void WeaponSave()
     {
         WeaponData weaponData = new WeaponData();
         weaponData.rifleLevel = new int[Data.Instance.rifles.Length];
         weaponData.shotgunLevel = new int[Data.Instance.shotguns.Length];
 
-        for(int i = 0; i < weaponData.rifleLevel.Length; i++)
+        for (int i = 0; i < weaponData.rifleLevel.Length; i++)
         {
             weaponData.rifleLevel[i] = Data.Instance.rifles[i].Level;
         }
@@ -26,15 +48,15 @@ public class DataSave : MonoBehaviour
     {
         FixtureData fixtureData = new FixtureData();
         fixtureData.itemNumbers = new int[Data.Instance.items.Length];
-        fixtureData.materialNumbers = new int[Data.Instance.materials.Length];
+        fixtureData.ingredientNumbers = new int[Data.Instance.ingredients.Length];
 
-        for(int i = 0; i < fixtureData.itemNumbers.Length; i++)
+        for (int i = 0; i < fixtureData.itemNumbers.Length; i++)
         {
             fixtureData.itemNumbers[i] = Data.Instance.items[i].Number;
         }
-        for(int i = 0; i < fixtureData.materialNumbers.Length; i++)
+        for (int i = 0; i < fixtureData.ingredientNumbers.Length; i++)
         {
-            fixtureData.materialNumbers[i] = Data.Instance.materials[i].Number;
+            fixtureData.ingredientNumbers[i] = Data.Instance.ingredients[i].Number;
         }
         SaveMethod("/Data/fixture.json", fixtureData);
     }
@@ -43,22 +65,24 @@ public class DataSave : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            Data.Instance.levels[i].missionOpen = new bool[Data.Instance.levels[i].missions.Length];
-            for (int j = 0; j < Data.Instance.levels[i].missions.Length; j++)
+            LevelData levelData = new LevelData();
+            levelData.missionOpen = new bool[Data.Instance.levels[i].missions.Length];
+
+            levelData.levelOpen = Data.Instance.levels[i].Open;
+            for (int j = 0; j < levelData.missionOpen.Length; j++)
             {
-                Data.Instance.levels[i].missionOpen[j] = Data.Instance.levels[i].missions[j].Open;
+                levelData.missionOpen[j] = Data.Instance.levels[i].missions[j].Open;
             }
-            SaveMethod("/Data/level"+(i+1).ToString()+".json", Data.Instance.levels[i]);
+            SaveMethod("/Data/level" + (i + 1).ToString() + ".json", levelData);
         }
     }
-
 
     public static void WeaponLoad()
     {
         WeaponData weaponData = new WeaponData();
         LoadMethod("/Data/weapon.json", weaponData);
 
-        for(int i = 0; i < weaponData.rifleLevel.Length; i++)
+        for (int i = 0; i < weaponData.rifleLevel.Length; i++)
         {
             Data.Instance.rifles[i].Level = weaponData.rifleLevel[i];
         }
@@ -71,16 +95,15 @@ public class DataSave : MonoBehaviour
     public static void FixtureLoad()
     {
         FixtureData fixtureData = new FixtureData();
-
         LoadMethod("/Data/fixture.json", fixtureData);
 
         for (int i = 0; i < fixtureData.itemNumbers.Length; i++)
         {
             Data.Instance.items[i].Number = fixtureData.itemNumbers[i];
         }
-        for (int i = 0; i < fixtureData.materialNumbers.Length; i++)
+        for (int i = 0; i < fixtureData.ingredientNumbers.Length; i++)
         {
-            Data.Instance.materials[i].Number = fixtureData.materialNumbers[i];
+            Data.Instance.ingredients[i].Number = fixtureData.ingredientNumbers[i];
         }
     }
 
@@ -88,17 +111,16 @@ public class DataSave : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            Data.Instance.levels[i].missionOpen = new bool[Data.Instance.levels[i].missions.Length];
-            LoadMethod("/Data/level" + (i + 1).ToString() + ".json", Data.Instance.levels[i]);
+            LevelData levelData = new LevelData();
+            LoadMethod("/Data/level" + (i + 1).ToString() + ".json", levelData);
 
-
-            for (int j = 0; j < Data.Instance.levels[i].missions.Length; j++)
+            Data.Instance.levels[i].Open = levelData.levelOpen;
+            for (int j = 0; j < levelData.missionOpen.Length; j++)
             {
-                Data.Instance.levels[i].missions[j].Open = Data.Instance.levels[i].missionOpen[j];
+                Data.Instance.levels[i].missions[j].Open = levelData.missionOpen[j];
             }
         }
     }
-
 
     public static void SaveMethod(string localPath, object data)
     {
@@ -120,16 +142,3 @@ public class DataSave : MonoBehaviour
     }
 }
 
-[Serializable]
-public class FixtureData
-{
-    public int[] itemNumbers;
-    public int[] materialNumbers;
-}
-
-[Serializable]
-public class WeaponData
-{
-    public int[] rifleLevel;
-    public int[] shotgunLevel;
-}

@@ -5,61 +5,97 @@ using UnityEngine.UI;
 
 public class SelectManager : MonoBehaviour
 {
-    //ボタンプレハブ
-    [SerializeField] private GameObject missionButton;
-
-    [SerializeField] private GameObject content;
-    [SerializeField] private GameObject image;
     [SerializeField] private Button previous;
     [SerializeField] private Button next;
     [SerializeField] private Text page;
-
+    [SerializeField] private Button back;
+    [SerializeField] private GameObject image;
     [SerializeField] private GameObject missions;
+    [SerializeField] private GameObject important;
     [SerializeField] private GameObject levels;
 
-    private byte pageNumber;
-    private byte levelNumber;
+    private int pageNumber;
 
-    public void ToBase()
+    private void Start()
+    {
+        pageNumber = 1;
+        back.onClick.AddListener(() => {
+            ToBase();
+        });
+    }
+
+    public void ToMissionPage(int index)
+    {
+        levels.SetActive(false);
+        missions.SetActive(true);
+        ContentDisplay(index);
+        Page(-2);
+        back.onClick.RemoveAllListeners();
+        back.onClick.AddListener(() => ToLevelPage());
+    }
+
+    private void ToLevelPage()
+    {
+        missions.SetActive(false);
+        levels.SetActive(true);
+        image.SetActive(false);
+        back.onClick.RemoveAllListeners();
+        back.onClick.AddListener(() => ToBase());
+    }
+
+    private void ToBase()
     {
         GameObject.Find("TableCamera").GetComponent<CameraAngle>().Select_to_Base();
     }
+
     public void ToMission()
     {
-        SceneMigration.MigrateSingle(AnimaScene.Mission);
+        if (Data.Instance.MainWeapon == null)
+        {
+            Debug.Log("No weapon!");
+        }
+        else
+        {
+            SceneMigration.MigrateSingle(AnimaScene.Mission);
+        }
     }
 
-    public void LevelSelect(string l)
+    private void ContentDisplay(int index)
     {
-        switch (l)
+        Button[] buttons = missions.GetComponentsInChildren<Button>();
+        for(int i = 0; i < Data.Instance.levels[index].missions.Length; i++)
         {
-            case "1": levelNumber = 0; break;
-            case "2": levelNumber = 1; break;
-            case "3": levelNumber = 2; break;
-            case "4": levelNumber = 3; break;
-            default: break;
+            Mission mission = Data.Instance.levels[index].missions[i];
+            buttons[i].gameObject.GetComponentInChildren<Text>().text = mission.name;
+            buttons[i].onClick.AddListener(() =>{
+                Data.Instance.selectedMission = mission;
+                MissionDisplay();
+            });
         }
-        Page("s");
-        missions.transform.position += Vector3.right * 640f;
-        levels.transform.position += Vector3.left * 640f;
     }
 
-    public void ContentGenerator()
+    public void Page(int index)
     {
-        foreach(Transform mission in content.transform)
+        pageNumber += index;
+        if (pageNumber <= 1)
         {
-            Destroy(mission.gameObject);
+            pageNumber = 1;
+            previous.interactable = false;
         }
-
-        for(int i = pageNumber * 5; i < (pageNumber + 1) * 5; i++)
+        else if (3 <= pageNumber)
         {
-            GameObject Mission = Instantiate(missionButton) as GameObject;
-            Mission.transform.SetParent(content.transform);
-            Mission.GetComponent<MissionContent>().mission = Data.Instance.levels[levelNumber].missions[i];
+            pageNumber = 3;
+            next.interactable = false;
         }
+        else
+        {
+            previous.interactable = true;
+            next.interactable = true;
+        }
+        page.text = pageNumber.ToString() + " / 3";
     }
 
-    public void ContentDisplay()
+    public void MissionDisplay()
     {
         image.SetActive(true);
         Mission mission = Data.Instance.selectedMission;
@@ -68,31 +104,10 @@ public class SelectManager : MonoBehaviour
         {
             content = content + p.PreyName + p.number.ToString() + "頭 ";
         }
-        image.GetComponentInChildren<Text>().text
-            = "内容：" + content + "の狩猟"+ Environment.NewLine
-            + "報酬：" + mission.Compensation + "$" + Environment.NewLine
-            + "時間：" + mission.Limit + "分" + Environment.NewLine;
-    }
-
-    public void Page(string p)
-    {
-        switch (p)
-        {
-            case "s":
-                pageNumber = 0;
-                break;
-            case "p":
-                pageNumber++;
-                break;
-            case "n":
-                pageNumber--;
-                break;
-            default:break;
-        }
-        ContentGenerator();
-        previous.interactable = pageNumber != 0;
-        next.interactable = pageNumber != 2;
-        page.text = (pageNumber + 1) + " / 3";
+        Text[] texts = image.GetComponentsInChildren<Text>();
+        texts[0].text = "内容：" + content + "の狩猟";
+        texts[1].text = "報酬：" + mission.Compensation + "$";
+        texts[2].text = "時間：" + mission.Limit + "分";
     }
 }
 

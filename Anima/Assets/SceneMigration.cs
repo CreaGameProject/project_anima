@@ -5,11 +5,11 @@ public enum AnimaScene {Title,Table,Base,Save,Weapon,WeaponEnhance,WeaponSelect,
 
 public class SceneMigration : MonoBehaviour
 {
+    public static AnimaScene preScene;
     private void Start()
     {
         DontDestroyOnLoad(this.gameObject);
     }
-
 
     public static void MigrateSingle(AnimaScene to)
     {

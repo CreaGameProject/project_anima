@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Title/Title.unity
+- path: Assets/Weapon/WeaponEnhance.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

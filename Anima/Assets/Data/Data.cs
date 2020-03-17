@@ -17,9 +17,10 @@ public class Data : MonoBehaviour
     public Mission selectedMission;
     public Item[] takeItems;
 
-    public Material[] materials;
+    public Ingredient[] ingredients;
 
     public Level[] levels;
+    public ImportantMission[] importants;
 
     private void Awake()
     {
@@ -38,8 +39,7 @@ public class Data : MonoBehaviour
 public class Level
 {
     [SerializeField] private bool open;
-    [HideInInspector] public bool[] missionOpen;
-    public Mission[] missions;
-
     public bool Open { get { return open; } set { open = value; } }
+
+    public Mission[] missions;
 }

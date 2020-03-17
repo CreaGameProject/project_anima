@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/Weapon/WeaponSelect.unity
     guid: a9accf1eb1e9d5b47af2a5e01b40f1ba
   - enabled: 1
-    path: Assets/FixtureHome.unity
+    path: Assets/Fixture/FixtureHome.unity
     guid: fddb8af7c669cff4d80dc424523e0ca4
   - enabled: 1
     path: Assets/Select/Select.unity

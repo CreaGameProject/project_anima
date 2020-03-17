@@ -24,7 +24,7 @@ public class CompensationManager : MonoBehaviour
     private void Start()
     {
         SceneMigration.LoadTable();
-        foreach(Button button in GameObject.Find("materials").GetComponentsInChildren<Button>())
+        foreach(Button button in GameObject.Find("ingredients").GetComponentsInChildren<Button>())
         {
             button.onClick.AddListener(() => {
                 selecting = button.gameObject;
@@ -42,9 +42,9 @@ public class CompensationManager : MonoBehaviour
         monitor1.SetActive(false);
         compensationValue.text =
             Data.Instance.selectedMission.Compensation.ToString() + "$" + System.Environment.NewLine +
-            Data.Instance.materials[0].Number.ToString() + "$" + System.Environment.NewLine +
+            Data.Instance.ingredients[0].Number.ToString() + "$" + System.Environment.NewLine +
             System.Environment.NewLine +
-            (Data.Instance.materials[0].Number += Data.Instance.selectedMission.Compensation).ToString() + "$";
+            (Data.Instance.ingredients[0].Number += Data.Instance.selectedMission.Compensation).ToString() + "$";
         monitor2.SetActive(true);
     }
 }
