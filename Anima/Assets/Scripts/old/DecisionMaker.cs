@@ -66,7 +66,7 @@ public abstract class DecisionMaker: MonoBehaviour
     }
 
     /// <summary> 特定の座標まで移動 </summary>
-    /// <param name="reachDistance"> destinationまでたどり着いたと判定してもよい距離 </param>
+    /// <param Name="reachDistance"> destinationまでたどり着いたと判定してもよい距離 </param>
     public IEnumerator MoveToPoint(Vector3 destination, float reachDistance){
         if(_navMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid)//パスが無効
         {

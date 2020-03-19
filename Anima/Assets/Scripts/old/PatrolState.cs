@@ -21,7 +21,7 @@ public class PatrolState : MonoBehaviour
     
     // DecisionMakerから借りてくる関数
     /// <summary> 特定の座標まで移動 </summary>
-    /// <param name="reachDistance"> destinationまでたどり着いたと判定してもよい距離 </param>
+    /// <param Name="reachDistance"> destinationまでたどり着いたと判定してもよい距離 </param>
     public delegate IEnumerator MoveToPoint(Vector3 destination, float reachDistance);
     public MoveToPoint moveToPoint;
 
@@ -79,7 +79,7 @@ public class PatrolState : MonoBehaviour
         }
 
         /// <summary> 腹減りの処理 正で減少 </summary>
-        /// <param name="hungry">腹減り値</param>
+        /// <param Name="hungry">腹減り値</param>
         public void Hunger(float hungry){
             satisfaction = Mathf.Clamp(satisfaction - hungry, 0, 1);
         }
@@ -149,7 +149,7 @@ public class PatrolState : MonoBehaviour
     }
 
     /// <summary> 満腹度の回復、消費　引数のPatrolPoint領域内であれば回復する </summary>
-    /// <param name="pp">現在の移動目標のPatrolPoint</param>
+    /// <param Name="pp">現在の移動目標のPatrolPoint</param>
     private void Satisfy(PatrolPoint pp){
         // 消費
         float deltaTime = Time.deltaTime;
