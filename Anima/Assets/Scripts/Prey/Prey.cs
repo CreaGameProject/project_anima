@@ -23,20 +23,26 @@ namespace Assets.Scripts.Prey
         {
             if (navAgent.SetDestination(destination))
             {
+                foreach (var pathCorner in navAgent.path.corners)
+                {
+                    Debug.Log(pathCorner);
+                }
                 navAgent.speed = speed * intensity;
-                StartCoroutine(WalkMotion());
+                StartCoroutine(WalkMotion(intensity));
             }
         }
 
-        private IEnumerator WalkMotion()
+        private IEnumerator WalkMotion(float intensity)
         {
-            Debug.Log(navAgent.pathStatus);
+            Debug.Log(navAgent.nextPosition);
+            animator.SetFloat("Intensity", intensity);
             animator.SetBool("Walking", true);
-            while (navAgent.pathStatus == NavMeshPathStatus.PathComplete)
+            while (navAgent.pathPending)
             {
                 yield return null;
             }
             animator.SetBool("Walking", false);
+            Debug.Log("Complete");
         }
 
         public bool Damage(int attack)
