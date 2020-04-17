@@ -61,7 +61,7 @@ namespace Assets.Scripts.Prey
         }
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             Parts = GetComponentsInChildren<Part>().ToDictionary(x => x.Name);
             navAgent = GetComponent<NavMeshAgent>();
